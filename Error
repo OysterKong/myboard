@@ -1,3 +1,5 @@
 Q1. Missing artifact javax.servlet:servlet-api:jar:3.1.0
 A1. 기존 <dependency> 의 <artifactId>servlet-api</artifactId> 를 <artifactId>javax.servlet-api</artifactId> 로 수정
 
+Q2. 
+
