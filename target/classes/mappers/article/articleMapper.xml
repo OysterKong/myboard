@@ -5,8 +5,8 @@
 <mapper namespace="com.oyster.myboard.mappers.article.ArticleMapper">
 
 	<insert id="create">
-		INSERT INTO tb_article (article_no, title, content, writer, viewcnt)
-		VALUES (#{article_no}, #{title}, #{content}, #{writer}, #{viewCnt})
+		INSERT INTO tb_article (title, content, writer)
+		VALUES (#{title}, #{content}, #{writer})
 	</insert>
 	
 	<select id="read" resultMap="ArticleResultMap">

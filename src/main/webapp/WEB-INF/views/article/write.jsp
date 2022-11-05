@@ -28,7 +28,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item"><a href="${path}/article/list">Home</a></li>
               <li class="breadcrumb-item active">Starter Page</li>
             </ol>
           </div><!-- /.col -->
@@ -98,4 +98,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- REQUIRED SCRIPTS -->
  <%@ include file="../include/plugin_js.jsp" %>
 </body>
+<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+<script>
+
+	$(document).ready(function () {
+		
+	    $(".btn-primary").on("click", function () {
+	    	self.location = "${path}/article/list"
+	    });
+	
+	});
+	
+</script>
 </html>

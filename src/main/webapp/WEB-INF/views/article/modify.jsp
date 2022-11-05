@@ -97,6 +97,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- REQUIRED SCRIPTS -->
  <%@ include file="../include/plugin_js.jsp" %>
 </body>
+<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 <script>
 
 	$(document).ready(function () {
@@ -114,6 +115,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	
 	    $(".listBtn").on("click", function () {
 	        self.location = "${path}/article/list"
+
 	    });
 	
 	});

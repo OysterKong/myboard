@@ -27,7 +27,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item"><a href="${path}/article/list">Home</a></li>
               <li class="breadcrumb-item active">Starter Page</li>
             </ol>
           </div><!-- /.col -->
@@ -101,6 +101,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- REQUIRED SCRIPTS -->
  <%@ include file="../include/plugin_js.jsp" %>
 </body>
+<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 <script>
 
 	var result = "${msg}";
@@ -111,6 +112,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	} else if (result == "delSuccess") {
 	    alert("게시글 삭제가 완료되었습니다.");
 	}
+	
+	$(document).ready(function () {
+		
+	    $("#writeBtn").on("click", function () {
+	    	self.location = "${path}/article/write"
+	    });
+	
+	});
 	
 </script>
 </html>

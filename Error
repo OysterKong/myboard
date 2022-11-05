@@ -7,3 +7,16 @@ java.sql.SQLException: Unable to load authentication plugin 'caching_sha2_passwo
 A2. pom.xml 에서 MySQL라이브러리의 버전이 내가 사용하는 MySQL Workbench 버전과 맞지 않아서 발생하는 오류.  
 예제에서는 MySQL이 5버전이라 pom.xml에 5로 설정했으나 실제로 내가 사용하는 MySQL Workbench는 8.0 버전으로 일치하지 않아 발생하는 오류
 
+Q3.  Uncaught ReferenceError: $ is not defined   (jQuery 사용 시)
+A3.  jsp 에서 jQuery 사용위한 기능 코드를 넣어놓고 정작 jQuery 사용위한 코드를 선언해주지 않아 발생했던 오류.
+	<script src="https://code.jquery.com/jquery-1.11.3.js"></script> 를 넣어줌으로써 해결
+	
+Q4. "Column 'regdate' cannot be null"
+regDate의 경우 DB에서 notnull, now() 로 설정해두어도 게시판에서 글을 작성하면 null로 입력되어 발생했던 에러
+A4. Mapper를 통해 regDate를 주입받는 것이 아닌 자동으로 설정되어 DB에 들어가야하므로 쿼리문에서 regDate 자체를 삭제 - #{regDate} 부분 삭제
+
+Q5. MySQL 사용하면서 DB에는 regDate가 현재시간으로 정상적으로 저장되는데 웹상에서 +9시간으로 표기되는 경우
+A5.  root-context.xml 에서 수정완료
+ 수정 전 -  <property name="url" value="jdbc:log4jdbc:mysql://127.0.0.1:3306/myboard?serverTimezone=UTC&amp;useSSL=false"></property>
+ 수정 후 -  <property name="url" value="jdbc:log4jdbc:mysql://127.0.0.1:3306/myboard?serverTimezone=Asia/Seoul&amp;useSSL=false"></property>
+

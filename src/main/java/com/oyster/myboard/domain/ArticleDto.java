@@ -1,6 +1,6 @@
 package com.oyster.myboard.domain;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 public class ArticleDto {
 	
@@ -8,7 +8,7 @@ public class ArticleDto {
 	private String title;
 	private String content;
 	private String writer;
-	private Timestamp regDate;
+	private Date regDate;
 	private int viewCnt;
 
 
@@ -36,10 +36,10 @@ public class ArticleDto {
 	public void setWriter(String writer) {
 		this.writer = writer;
 	}
-	public Timestamp getRegDate() {
+	public Date getRegDate() {
 		return regDate;
 	}
-	public void setRegDate(Timestamp regDate) {
+	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
 	public int getViewCnt() {

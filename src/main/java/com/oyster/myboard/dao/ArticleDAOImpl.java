@@ -17,8 +17,7 @@ public class ArticleDAOImpl implements ArticleDAO {
 	
 	@Override
 	public void create(ArticleDto dto) throws Exception {
-		int number = session.insert(namespace + "create", dto);
-		System.out.println("DAO단에서 NUMBER 찍히는지 = " + number);
+		session.insert(namespace + "create", dto);
 	}
 	
 	@Override

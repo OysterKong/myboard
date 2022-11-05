@@ -12,32 +12,32 @@ import com.oyster.myboard.domain.ArticleDto;
 public class ArticleServiceImpl implements ArticleService {
 	
 	@Autowired
-	private ArticleDAO articledao;
+	private ArticleDAO articleDao;
 	
 	
 	@Override
 	public void create(ArticleDto dto) throws Exception {
-		articledao.create(dto);
+		articleDao.create(dto);
 	}
 	
 	@Override
 	public ArticleDto read(Integer article_no) throws Exception {
-		return articledao.read(article_no);
+		return articleDao.read(article_no);
 	}
 	
 	@Override
 	public void update(ArticleDto dto) throws Exception {
-		articledao.update(dto);
+		articleDao.update(dto);
 	}
 	
 	@Override
 	public void delete(Integer article_no) throws Exception {
-		articledao.delete(article_no);
+		articleDao.delete(article_no);
 	}
 	
 	@Override
 	public List<ArticleDto> listAll() throws Exception {
-		return articledao.listAll();
+		return articleDao.listAll();
 	}
 	
 
