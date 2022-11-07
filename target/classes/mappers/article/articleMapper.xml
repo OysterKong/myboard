@@ -35,6 +35,36 @@
 		]]>
 	</select>
 	
+	<select id="listPaging" resultMap="ArticleResultMap">
+	    <![CDATA[
+	    SELECT article_no, title, content, writer, regdate, viewcnt
+	    FROM tb_article
+	    WHERE article_no > 0
+	    ORDER BY article_no DESC, regdate DESC
+	    LIMIT #{page}, 10
+	    ]]>
+	</select>
+	
+	<select id="listPageStandard" resultMap="ArticleResultMap">
+	    <![CDATA[
+	    SELECT article_no, title, content, writer, regdate, viewcnt
+	    FROM tb_article
+	    WHERE article_no > 0
+	    ORDER BY article_no DESC, regdate DESC
+	    LIMIT #{pageStart}, #{perPageNum}
+	    ]]>
+	</select>
+	
+	<select id="countArticles" resultType="int">
+	    <![CDATA[
+	    SELECT COUNT(article_no)
+	    FROM tb_article
+	    WHERE article_no > 0
+	    ]]>
+	</select>
+	
+	
+	
 	<resultMap id="ArticleResultMap" type="ArticleDto">
         <id property="article_no" column="article_no"/>
         <result property="title" column="title" />

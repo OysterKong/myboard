@@ -14,7 +14,7 @@
           <img src="${path}/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+          <a href="#" class="d-block">OysterKong</a>
         </div>
       </div>
 
@@ -24,7 +24,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item has-treeview menu-open">
-            <a href="#" class="nav-link active">
+            <a href="#" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Starter Pages
@@ -33,7 +33,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="${path}/article/write" class="nav-link active">
+                <a href="${path}/article/write" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Write Page</p>
                 </a>
@@ -42,6 +42,12 @@
                 <a href="${path}/article/list" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>List Page</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="${path}/article/listPaging" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>List Paging Page</p>
                 </a>
               </li>
             </ul>

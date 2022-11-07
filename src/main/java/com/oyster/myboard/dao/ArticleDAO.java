@@ -2,6 +2,7 @@ package com.oyster.myboard.dao;
 
 import java.util.List;
 
+import com.oyster.myboard.commons.paging.PageStandard;
 import com.oyster.myboard.domain.ArticleDto;
 
 public interface ArticleDAO {
@@ -15,5 +16,11 @@ public interface ArticleDAO {
 	void delete(Integer article_no) throws Exception;
 
 	List<ArticleDto> listAll() throws Exception;
+	
+	List<ArticleDto> listPaging(int page) throws Exception;
+	
+	List<ArticleDto> listPageStandard(PageStandard standard) throws Exception;
+	
+	int countArticles(PageStandard standard) throws Exception;
 
 }

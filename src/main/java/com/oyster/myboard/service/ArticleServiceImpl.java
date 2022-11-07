@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.oyster.myboard.commons.paging.PageStandard;
 import com.oyster.myboard.dao.ArticleDAO;
 import com.oyster.myboard.domain.ArticleDto;
 
@@ -39,6 +40,18 @@ public class ArticleServiceImpl implements ArticleService {
 	public List<ArticleDto> listAll() throws Exception {
 		return articleDao.listAll();
 	}
+	
+	@Override
+	public List<ArticleDto> listPageStandard(PageStandard standard) throws Exception {
+		return articleDao.listPageStandard(standard);
+	}
+	
+	@Override
+	public int countArticles(PageStandard standard) throws Exception {
+	    return articleDao.countArticles(standard);
+	}
+	
+	
 	
 
 }

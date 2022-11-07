@@ -39,39 +39,39 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Main content -->
     <div class="content">
       <div class="container-fluid">
-
-<div class="col-lg-12">
-    <form role="form" id="writeForm" method="post" action="${path}/article/modify">
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">게시글 작성</h3>
-            </div>
-            <div class="card-body">
-                <input type="hidden" name="article_no" value="${article.article_no}">
-                <div class="form-group">
-                    <label for="title">제목</label>
-                    <input class="form-control" id="title" name="title" placeholder="제목을 입력해주세요" value="${article.title}">
-                </div>
-                <div class="form-group">
-                    <label for="content">내용</label>
-                    <textarea class="form-control" id="content" name="content" rows="30"
-                              placeholder="내용을 입력해주세요" style="resize: none;">${article.content}</textarea>
-                </div>
-                <div class="form-group">
-                    <label for="writer">작성자</label>
-                    <input class="form-control" id="writer" name="writer" value="${article.writer}" readonly>
-                </div>
-            </div>
-            <div class="card-footer">
-                <button type="button" class="btn btn-primary listBtn"><i class="fa fa-list"></i> 목록</button>
-                <div class="float-right">
-                    <button type="button" class="btn btn-warning cancelBtn"><i class="fa fa-trash"></i> 취소</button>
-                    <button type="submit" class="btn btn-success modBtn"><i class="fa fa-save"></i> 수정 저장</button>
-                </div>
+      
+ <div class="col-lg-12">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">글제목 : ${article.title}</h3>
+        </div>
+        <div class="card-body" style="height: 700px">
+            ${article.content}
+        </div>
+        <div class="card-footer">
+            <div class="user-block">
+                <img class="img-circle img-bordered-sm" src="${path}/dist/img/user1-128x128.jpg" alt="user image">
+                <span class="username">
+                    <a href="#">${article.writer}</a>
+                </span>
+                <span class="description"><fmt:formatDate pattern="yyyy-MM-dd" value="${article.regDate}"/></span>
             </div>
         </div>
-    </form>
-</div>
+		<div class="card-footer">
+		    <form role="form" method="post">
+		        <input type="hidden" name="article_no" value="${article.article_no}">
+		        <input type="hidden" name="page" value="${standard.page}">
+		        <input type="hidden" name="perPageNum" value="${standard.perPageNum}">
+		    </form>
+		    <button type="submit" class="btn btn-primary listBtn"><i class="fa fa-list"></i> 목록</button>
+		    <div class="float-right">
+		        <button type="submit" class="btn btn-warning modBtn"><i class="fa fa-edit"></i> 수정</button>
+		        <button type="submit" class="btn btn-danger delBtn"><i class="fa fa-trash"></i> 삭제</button>
+		    </div>
+		</div>
+    </div>
+</div>     
+
 
       </div><!-- /.container-fluid -->
     </div>
@@ -99,26 +99,28 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </body>
 <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 <script>
-
 	$(document).ready(function () {
 	
 	    var formObj = $("form[role='form']");
 	    console.log(formObj);
 	
 	    $(".modBtn").on("click", function () {
+	        formObj.attr("action", "${path}/article/modifyPaging");
+	        formObj.attr("method", "get");
 	        formObj.submit();
 	    });
 	
-	    $(".cancelBtn").on("click", function () {
-	        history.go(-1);
+	    $(".delBtn").on("click", function () {
+	       formObj.attr("action", "${path}/article/removePaging");
+	       formObj.submit();
 	    });
 	
 	    $(".listBtn").on("click", function () {
-	        self.location = "${path}/article/list"
-
+	       formObj.attr("method", "get");
+	       formObj.attr("action", "${path}/article/listPaging");
+	       formObj.submit();
 	    });
 	
 	});
-
 </script>
 </html>

@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.oyster.myboard.commons.paging.PageStandard;
 import com.oyster.myboard.domain.ArticleDto;
 
 @Repository
@@ -40,5 +41,27 @@ public class ArticleDAOImpl implements ArticleDAO {
 		return session.selectList(namespace + "listAll");
 	}
 	
+	@Override
+	public List<ArticleDto> listPaging(int page) throws Exception {
+		
+		if(page <=0) {
+			page = 1;
+		}
+		
+		page = (page-1) * 10;
+		
+		return session.selectList(namespace + "listPaging", page);
+	}
+	
+	@Override
+	public List<ArticleDto> listPageStandard(PageStandard standard) throws Exception {
+		return session.selectList(namespace + "listPageStandard", standard);
+	}
+	
+	@Override
+	public int countArticles(PageStandard standard) throws Exception {
+		return session.selectOne(namespace + "countArticles", standard);
+	}
+
 
 }
