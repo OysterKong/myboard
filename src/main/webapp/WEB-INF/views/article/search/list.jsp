@@ -5,16 +5,16 @@ This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
 -->
 <html lang="en">
-<%@ include file="../include/head.jsp" %>
+<%@ include file="../../include/head.jsp" %>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
 
   <!-- Navbar -->
-  <%@ include file="../include/main_header.jsp" %>
+  <%@ include file="../../include/main_header.jsp" %>
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-  <%@ include file="../include/left_column.jsp" %>
+  <%@ include file="../../include/left_column.jsp" %>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -60,9 +60,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		                 <c:forEach items="${articles}" var="article">
 		                  <tr>
 		                    <td>${article.article_no}</td>
-		                    <td><a href="${path}/article/readPaging${pageMaker.makeQuery(pageMaker.standard.page)}&article_no=${article.article_no}">${article.title}</a></td>
+		                    <td><a href="${path}/article/paging/read${pageMaker.makeQuery(pageMaker.standard.page)}&article_no=${article.article_no}">${article.title}</a></td>
 		                    <td>${article.writer}</td>
-		                    <td><fmt:formatDate value="${article.regDate}" pattern="yyyy-MM-dd"/></td>
+		                    <td><fmt:formatDate value="${article.regDate}" pattern="yyyy-MM-dd a HH:mm"/></td>
 		                    <td><span class="badge bg-success">${article.viewCnt}</span></td>
 		                  </tr>
 		                 </c:forEach>
@@ -81,18 +81,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		    	<ul class="pagination justify-content-center m-0">
 			      <c:if test="${pageMaker.prev}">
 			        <li class="page-item"><a class="page-link"
-			        href="${path}/article/listPaging${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
+			        href="${path}/article/paging/list${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
 			      </c:if>
 			      <c:forEach begin="${pageMaker.startPage}"
 			        end="${pageMaker.endPage}" var="idx">
 			        <li class="page-item"
 			        <c:out value="${pageMaker.standard.page == idx ? 'class=active' : ''}"/>>
-			        <a class="page-link" href="${path}/article/listPaging${pageMaker.makeQuery(idx)}">${idx}</a>
+			        <a class="page-link" href="${path}/article/paging/list${pageMaker.makeQuery(idx)}">${idx}</a>
 			        </li>
 			      </c:forEach>
 			      <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
 			        <li class="page-item"><a class="page-link"
-			        href="${path}/article/listPaging?${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
+			        href="${path}/article/paging/list${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
 			      </c:if>
 		         </ul>
 		        </nav>
@@ -117,12 +117,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- /.control-sidebar -->
 
   <!-- Main Footer -->
-  <%@ include file="../include/main_footer.jsp" %>
+  <%@ include file="../../include/main_footer.jsp" %>
  </div>
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
- <%@ include file="../include/plugin_js.jsp" %>
+ <%@ include file="../../include/plugin_js.jsp" %>
 </body>
 <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 <script>

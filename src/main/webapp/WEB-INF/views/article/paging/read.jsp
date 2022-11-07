@@ -5,16 +5,16 @@ This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
 -->
 <html lang="en">
-<%@ include file="../include/head.jsp" %>
+<%@ include file="../../include/head.jsp" %>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
 
   <!-- Navbar -->
-  <%@ include file="../include/main_header.jsp" %>
+  <%@ include file="../../include/main_header.jsp" %>
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-  <%@ include file="../include/left_column.jsp" %>
+  <%@ include file="../../include/left_column.jsp" %>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -90,12 +90,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- /.control-sidebar -->
 
   <!-- Main Footer -->
-  <%@ include file="../include/main_footer.jsp" %>
+  <%@ include file="../../include/main_footer.jsp" %>
  </div>
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
- <%@ include file="../include/plugin_js.jsp" %>
+ <%@ include file="../../include/plugin_js.jsp" %>
 </body>
 <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 <script>
@@ -105,19 +105,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	    console.log(formObj);
 	
 	    $(".modBtn").on("click", function () {
-	        formObj.attr("action", "${path}/article/modifyPaging");
+	        formObj.attr("action", "${path}/article/paging/modify");
 	        formObj.attr("method", "get");
 	        formObj.submit();
 	    });
 	
 	    $(".delBtn").on("click", function () {
-	       formObj.attr("action", "${path}/article/removePaging");
+	       formObj.attr("action", "${path}/article/paging/remove");
 	       formObj.submit();
 	    });
 	
 	    $(".listBtn").on("click", function () {
 	       formObj.attr("method", "get");
-	       formObj.attr("action", "${path}/article/listPaging");
+	       formObj.attr("action", "${path}/article/paging/list");
 	       formObj.submit();
 	    });
 	

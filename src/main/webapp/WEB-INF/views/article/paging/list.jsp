@@ -5,16 +5,16 @@ This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
 -->
 <html lang="en">
-<%@ include file="../include/head.jsp" %>
+<%@ include file="../../include/head.jsp" %>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
 
   <!-- Navbar -->
-  <%@ include file="../include/main_header.jsp" %>
+  <%@ include file="../../include/main_header.jsp" %>
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-  <%@ include file="../include/left_column.jsp" %>
+  <%@ include file="../../include/left_column.jsp" %>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -27,7 +27,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="${path}/article/list">Home</a></li>
+              <li class="breadcrumb-item"><a href="${path}/article/listPaging">Home</a></li>
               <li class="breadcrumb-item active">Starter Page</li>
             </ol>
           </div><!-- /.col -->
@@ -39,7 +39,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Main content -->
     <div class="content">
       <div class="container-fluid">
-     
+      
 		<div class="col-lg-12">
 		    <div class="card">
 		        <div class="card-header">
@@ -47,23 +47,25 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		        </div>
 		        <div class="card-body">
 		            <table class="table table-bordered">
+		                <thead>
+			                <tr>
+			                    <th style="width: 30px">#</th>
+			                    <th>제목</th>
+			                    <th style="width: 100px">작성자</th>
+			                    <th style="width: 150px">작성시간</th>
+			                    <th style="width: 60px">조회</th>
+			                </tr>
+		                </thead>
 		                <tbody>
-		                <tr>
-		                    <th style="width: 30px">#</th>
-		                    <th>제목</th>
-		                    <th style="width: 100px">작성자</th>
-		                    <th style="width: 150px">작성시간</th>
-		                    <th style="width: 60px">조회</th>
-		                </tr>
-		                <c:forEach items="${articles}" var="article">
-		                <tr>
+		                 <c:forEach items="${articles}" var="article">
+		                  <tr>
 		                    <td>${article.article_no}</td>
-		                    <td><a href="${path}/article/read?article_no=${article.article_no}">${article.title}</a></td>
+		                    <td><a href="${path}/article/paging/read${pageMaker.makeQuery(pageMaker.standard.page)}&article_no=${article.article_no}">${article.title}</a></td>
 		                    <td>${article.writer}</td>
 		                    <td><fmt:formatDate value="${article.regDate}" pattern="yyyy-MM-dd a HH:mm"/></td>
 		                    <td><span class="badge bg-success">${article.viewCnt}</span></td>
-		                </tr>
-		                </c:forEach>
+		                  </tr>
+		                 </c:forEach>
 		                </tbody>
 		            </table>
 		        </div>
@@ -74,8 +76,29 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		                </button>
 		            </div>
 		        </div>
-		    </div>
-		</div>      
+		    <div class="card-footer">
+		  	<nav aria-label="Contacts Page Navigation">
+		    	<ul class="pagination justify-content-center m-0">
+			      <c:if test="${pageMaker.prev}">
+			        <li class="page-item"><a class="page-link"
+			        href="${path}/article/paging/list${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
+			      </c:if>
+			      <c:forEach begin="${pageMaker.startPage}"
+			        end="${pageMaker.endPage}" var="idx">
+			        <li class="page-item"
+			        <c:out value="${pageMaker.standard.page == idx ? 'class=active' : ''}"/>>
+			        <a class="page-link" href="${path}/article/paging/list${pageMaker.makeQuery(idx)}">${idx}</a>
+			        </li>
+			      </c:forEach>
+			      <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+			        <li class="page-item"><a class="page-link"
+			        href="${path}/article/paging/list${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
+			      </c:if>
+		         </ul>
+		        </nav>
+			   </div>
+		      </div>
+		     </div>      
 
       </div><!-- /.container-fluid -->
     </div>
@@ -94,12 +117,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- /.control-sidebar -->
 
   <!-- Main Footer -->
-  <%@ include file="../include/main_footer.jsp" %>
+  <%@ include file="../../include/main_footer.jsp" %>
  </div>
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
- <%@ include file="../include/plugin_js.jsp" %>
+ <%@ include file="../../include/plugin_js.jsp" %>
 </body>
 <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 <script>
@@ -116,7 +139,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	$(document).ready(function () {
 		
 	    $("#writeBtn").on("click", function () {
-	    	self.location = "${path}/article/write"
+	    	self.location = "${path}/article/paging/write"
 	    });
 	
 	});
