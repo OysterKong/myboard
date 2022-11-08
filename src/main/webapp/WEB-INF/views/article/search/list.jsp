@@ -27,7 +27,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="${path}/article/listPaging">Home</a></li>
+              <li class="breadcrumb-item"><a href="${path}/article/paging/search/list">Home</a></li>
               <li class="breadcrumb-item active">Starter Page</li>
             </ol>
           </div><!-- /.col -->
@@ -60,7 +60,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		                 <c:forEach items="${articles}" var="article">
 		                  <tr>
 		                    <td>${article.article_no}</td>
-		                    <td><a href="${path}/article/paging/read${pageMaker.makeQuery(pageMaker.standard.page)}&article_no=${article.article_no}">${article.title}</a></td>
+		                    <td><a href="${path}/article/paging/search/read${pageMaker.makeSearch(pageMaker.standard.page)}&article_no=${article.article_no}">${article.title}</a></td>
 		                    <td>${article.writer}</td>
 		                    <td><fmt:formatDate value="${article.regDate}" pattern="yyyy-MM-dd a HH:mm"/></td>
 		                    <td><span class="badge bg-success">${article.viewCnt}</span></td>
@@ -69,36 +69,59 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		                </tbody>
 		            </table>
 		        </div>
+		        
+ 		        <div class="card-footer">
+				    <div class="text-center">
+				        <ul class="pagination justify-content-center m-0">
+				            <c:if test="${pageMaker.prev}">
+				                <li><a href="${path}/article/paging/search/list${pageMaker.makeSearch(pageMaker.startPage - 1)}" class="page-link">이전</a></li>
+				            </c:if>
+				            <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+				                <li <c:out value="${pageMaker.standard.page == idx ? 'class=active' : ''}"/>>
+				                    <a href="${path}/article/paging/search/list${pageMaker.makeSearch(idx)}" class="page-link">${idx}</a>
+				                </li>
+				            </c:forEach>
+				            <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+				                <li><a href="${path}/article/paging/search/list${pageMaker.makeSearch(pageMaker.endPage + 1)}" class="page-link">다음</a></li>
+				            </c:if>
+				        </ul>
+				    </div>
+				</div>
+				       
 		        <div class="card-footer">
-		            <div class="float-right">
-		                <button type="button" class="btn btn-success btn-flat" id="writeBtn">
-		                    <i class="fa fa-pencil"></i> 글쓰기
-		                </button>
-		            </div>
-		        </div>
-		    <div class="card-footer">
-		  	<nav aria-label="Contacts Page Navigation">
-		    	<ul class="pagination justify-content-center m-0">
-			      <c:if test="${pageMaker.prev}">
-			        <li class="page-item"><a class="page-link"
-			        href="${path}/article/paging/list${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
-			      </c:if>
-			      <c:forEach begin="${pageMaker.startPage}"
-			        end="${pageMaker.endPage}" var="idx">
-			        <li class="page-item"
-			        <c:out value="${pageMaker.standard.page == idx ? 'class=active' : ''}"/>>
-			        <a class="page-link" href="${path}/article/paging/list${pageMaker.makeQuery(idx)}">${idx}</a>
-			        </li>
-			      </c:forEach>
-			      <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-			        <li class="page-item"><a class="page-link"
-			        href="${path}/article/paging/list${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
-			      </c:if>
-		         </ul>
-		        </nav>
-			   </div>
+				  <div class="row">
+				    <div class="form-group col-sm-2">
+				      <select class="form-control" name="searchType" id="searchType">
+				        <option value="n" <c:out value="${searchCondition.searchType == null ? 'selected' : ''}"/>>----- 선택 -----</option>
+				        <option value="t" <c:out value="${searchCondition.searchType eq 't' ? 'selected' : ''}"/>>제목</option>
+				        <option value="c" <c:out value="${searchCondition.searchType eq 'c' ? 'selected' : ''}"/>>내용</option>
+				        <option value="w" <c:out value="${searchCondition.searchType eq 'w' ? 'selected' : ''}"/>>작성자</option>
+				        <option value="tc" <c:out value="${searchCondition.searchType eq 'tc' ? 'selected' : ''}"/>>제목+내용</option>
+				        <option value="cw" <c:out value="${searchCondition.searchType eq 'cw' ? 'selected' : ''}"/>>내용+작성자</option>
+				        <option value="tcw" <c:out value="${searchCondition.searchType eq 'tcw' ? 'selected' : ''}"/>>제목+내용+작성자</option>
+				      </select>
+				    </div>
+				<div class="form-group col-sm-10">
+				        <div class="input-group">
+				        <input type="text" class="form-control" name="keyword" id="keywordInput" value="${searchCondition.keyword}" placeholder="검색어">
+				        <span class="input-group-btn">
+				          <button type="button" class="btn btn-primary btn-flat" id="searchBtn">
+				          	<i class="fa fa-search"></i> 검색
+				          </button>
+				        </span>
+				        </div>
+				      </div>
+				  </div>   
+
+		          <div class="float-right">
+		              <button type="button" class="btn btn-success btn-flat" id="writeBtn">
+		                  <i class="fa fa-pencil"></i> 글쓰기
+		              </button>
+		          </div>
+		        
 		      </div>
-		     </div>      
+		     </div>
+		    </div>      
 
       </div><!-- /.container-fluid -->
     </div>
@@ -120,14 +143,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <%@ include file="../../include/main_footer.jsp" %>
  </div>
 <!-- ./wrapper -->
-
+</div>
 <!-- REQUIRED SCRIPTS -->
  <%@ include file="../../include/plugin_js.jsp" %>
 </body>
 <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 <script>
 
-	var result = "${msg}";
+/* 	var result = "${msg}";
 	if (result == "regSuccess") {
 	    alert("게시글 등록이 완료되었습니다.");
 	} else if (result == "modSuccess") {
@@ -142,6 +165,31 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	    	self.location = "${path}/article/write"
 	    });
 	
+	}); */
+	
+	$(document).ready(function () {
+		
+		var result = "${msg}";
+		if (result == "regSuccess") {
+		    alert("게시글 등록이 완료되었습니다.");
+		} else if (result == "modSuccess") {
+		    alert("게시글 수정이 완료되었습니다.");
+		} else if (result == "delSuccess") {
+		    alert("게시글 삭제가 완료되었습니다.");
+		}
+		
+	    $("#searchBtn").on("click", function (event) {
+	        self.location =
+	            "${path}/article/paging/search/list${pageMaker.makeQuery(1)}"
+	            + "&searchType=" + $("select option:selected").val()
+	            + "&keyword=" + encodeURIComponent($("#keywordInput").val());
+	    });
+
+			
+		$("#writeBtn").on("click", function () {
+		    self.location = "${path}/article/paging/search/write"
+		});
+		
 	});
 	
 </script>

@@ -3,6 +3,7 @@ package com.oyster.myboard.dao;
 import java.util.List;
 
 import com.oyster.myboard.commons.paging.PageStandard;
+import com.oyster.myboard.commons.paging.SearchCondition;
 import com.oyster.myboard.domain.ArticleDto;
 
 public interface ArticleDAO {
@@ -22,5 +23,9 @@ public interface ArticleDAO {
 	List<ArticleDto> listPageStandard(PageStandard standard) throws Exception;
 	
 	int countArticles(PageStandard standard) throws Exception;
+	
+	List<ArticleDto> listSearch(SearchCondition searchCondition) throws Exception;
+
+	int countSearchedArticles(SearchCondition searchCondition) throws Exception;
 
 }

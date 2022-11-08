@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.oyster.myboard.commons.paging.PageStandard;
+import com.oyster.myboard.commons.paging.SearchCondition;
 import com.oyster.myboard.dao.ArticleDAO;
 import com.oyster.myboard.domain.ArticleDto;
 
@@ -49,6 +50,16 @@ public class ArticleServiceImpl implements ArticleService {
 	@Override
 	public int countArticles(PageStandard standard) throws Exception {
 	    return articleDao.countArticles(standard);
+	}
+	
+	@Override
+	public List<ArticleDto> listSearch(SearchCondition searchCondition) throws Exception {
+	    return articleDao.listSearch(searchCondition);
+	}
+
+	@Override
+	public int countSearchedArticles(SearchCondition searchCondition) throws Exception {
+	    return articleDao.countSearchedArticles(searchCondition);
 	}
 	
 	

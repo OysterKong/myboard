@@ -1,5 +1,8 @@
 package com.oyster.myboard.commons.paging;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -14,6 +17,33 @@ public class PageMaker {
     private int displayPageNum = 10; // 하단 페이지 번호의 갯수
 
     private PageStandard standard;
+    
+    //검색조건과 검색키워드에 해당하는 URI 작업을 담당
+    public String makeSearch(int page) {
+
+        UriComponents uriComponents = UriComponentsBuilder.newInstance()
+                .queryParam("page", page)
+                .queryParam("pagePageNum", standard.getPerPageNum())
+                .queryParam("searchType", ((SearchCondition) standard).getSearchType())
+                .queryParam("keyword", encoding(((SearchCondition) standard).getKeyword()))
+                .build();
+
+        return uriComponents.toUriString();
+    }
+    
+    //검색키워드의 인코딩처리 담당
+    private String encoding(String keyword) {
+        if (keyword == null || keyword.trim().length() == 0) {
+            return "";
+        }
+
+        try {
+            return URLEncoder.encode(keyword, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            return "";
+        }
+    }
+ 
     
     public String makeQuery(int page) {
         UriComponents uriComponents = UriComponentsBuilder.newInstance()

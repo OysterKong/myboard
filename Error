@@ -20,3 +20,5 @@ A5.  root-context.xml 에서 수정완료
  수정 전 -  <property name="url" value="jdbc:log4jdbc:mysql://127.0.0.1:3306/myboard?serverTimezone=UTC&amp;useSSL=false"></property>
  수정 후 -  <property name="url" value="jdbc:log4jdbc:mysql://127.0.0.1:3306/myboard?serverTimezone=Asia/Seoul&amp;useSSL=false"></property>
 
+Q6. Caused by: java.lang.IllegalStateException: Ambiguous mapping.
+A6. ambiguous 라는 단어 뜻과 같이 애매모호하여 매핑이 어렵다는 뜻, 컨트롤러에 @RequestMapping의 url이 중복되는지 확인 후 수정후 해결

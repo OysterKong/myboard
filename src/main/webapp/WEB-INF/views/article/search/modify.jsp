@@ -41,15 +41,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <div class="container-fluid">
 
 		<div class="col-lg-12">
-		    <form role="form" id="writeForm" method="post" action="${path}/article/paging/modify">
+		    <form role="form" id="writeForm" method="post" action="${path}/article/paging/search/modify">
 		        <div class="card">
 		            <div class="card-header">
 		                <h3 class="card-title">게시글 작성</h3>
 		            </div>
 		            <div class="card-body">
-					  <input type="hidden" name="article_no" value="${article.article_no}">
-					  <input type="hidden" name="page" value="${standard.page}">
-					  <input type="hidden" name="perPageNum" value="${standard.perPageNum}">
+				        <input type="hidden" name="article_no" value="${article.article_no}">
+				        <input type="hidden" name="page" value="${searchCondition.page}">
+				        <input type="hidden" name="perPageNum" value="${searchCondition.perPageNum}">
+				        <input type="hidden" name="searchType" value="${searchCondition.searchType}">
+				        <input type="hidden" name="keyword" value="${searchCondition.keyword}">
 					  <div class="form-group">
 					    <label for="title">제목</label> 
 					    <input class="form-control" id="title" name="title" placeholder="제목을 입력해주세요" value="${article.title}">
@@ -115,7 +117,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	    });
 	
 	    $(".listBtn").on("click", function () {
-	        self.location = "${path}/article/paging/list?page=${standard.page}&perPageNum=${standard.perPageNum}";
+	        self.location = "${path}/article/paging/search/list?page=${searchCondition.page}"
+	        + "&perPageNum=${searchCondition.perPageNum}"
+	        + "&searchType=${searchCondition.searchType}"
+	        + "&keyword=${searchCondition.keyword}";
 	    });
 	
 	});

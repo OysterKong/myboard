@@ -28,7 +28,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="${path}/article/list">Home</a></li>
+              <li class="breadcrumb-item"><a href="${path}/article/search/list">Home</a></li>
               <li class="breadcrumb-item active">Starter Page</li>
             </ol>
           </div><!-- /.col -->
@@ -42,7 +42,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <div class="container-fluid">
 
 		<div class="col-lg-12">
-		    <form role="form" id="writeForm" method="post" action="${path}/article/paging/write">
+		    <form role="form" id="writeForm" method="post" action="${path}/article/paging/search/write">
 		        <div class="card">
 		            <div class="card-header with-border">
 		                <h3 class="card-title">게시글 작성</h3>
@@ -103,7 +103,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	$(document).ready(function () {
 		
 	    $(".btn-primary").on("click", function () {
-	    	self.location = "${path}/article/list"
+	    	self.location = "${path}/article/paging/search/list"
 	    });
 	
 	});

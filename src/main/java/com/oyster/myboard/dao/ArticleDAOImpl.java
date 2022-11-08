@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.oyster.myboard.commons.paging.PageStandard;
+import com.oyster.myboard.commons.paging.SearchCondition;
 import com.oyster.myboard.domain.ArticleDto;
 
 @Repository
@@ -61,6 +62,16 @@ public class ArticleDAOImpl implements ArticleDAO {
 	@Override
 	public int countArticles(PageStandard standard) throws Exception {
 		return session.selectOne(namespace + "countArticles", standard);
+	}
+	
+	@Override
+	public List<ArticleDto> listSearch(SearchCondition searchCondition) throws Exception {
+		return session.selectList(namespace + "listSearch", searchCondition);
+	}
+	
+	@Override
+	public int countSearchedArticles(SearchCondition searchCondition) throws Exception {
+		return session.selectOne(namespace + "countSearchedArticles", searchCondition);
 	}
 
 
