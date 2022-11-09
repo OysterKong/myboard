@@ -53,5 +53,9 @@ public class ReplyDAOImpl implements ReplyDAO {
 		return session.selectOne(namespace + "countReplies", article_no);
 	}
 	
+	@Override
+	public int getArticleNo(Integer reply_no) throws Exception {
+	    return session.selectOne(namespace + "getArticleNo", reply_no);
+	}
 	
 }

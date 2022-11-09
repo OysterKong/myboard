@@ -85,6 +85,13 @@
 		
 		<!-- 추가부분 시작 -->
 		
+		<!-- @Transactional (트랜잭션) -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-tx</artifactId>
+		    <version>${org.springframework-version}</version>
+		</dependency>
+		
 		<dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>

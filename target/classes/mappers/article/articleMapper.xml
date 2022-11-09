@@ -71,11 +71,12 @@
         <result property="writer" column="writer" />
         <result property="regDate" column="regdate" />
         <result property="viewCnt" column="viewcnt" />
+        <result property="replyCnt" column="reply_cnt" />
     </resultMap>
     
     <select id="listSearch" resultMap="ArticleResultMap">
 	    <![CDATA[
-	    SELECT article_no, title, content, writer, regdate, viewcnt
+	    SELECT article_no, title, content, writer, regdate, viewcnt, reply_cnt
 	    FROM tb_article
 	    WHERE article_no > 0
 	    ]]>
@@ -127,6 +128,18 @@
 	        </if>
 	    </if>
 	</sql>
+	
+	<update id="updateReplyCnt">
+	    UPDATE tb_article
+	    SET reply_cnt = reply_cnt + #{amount}
+	    WHERE article_no = #{article_no}
+	</update>
+	
+	<update id="updateViewCnt">
+	    UPDATE tb_article
+	    SET viewcnt = viewcnt + 1
+	    WHERE article_no = #{article_no}
+	</update>
 
 
 </mapper>

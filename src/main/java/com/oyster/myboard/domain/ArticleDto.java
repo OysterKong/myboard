@@ -10,6 +10,7 @@ public class ArticleDto {
 	private String writer;
 	private Date regDate;
 	private int viewCnt;
+	private int replyCnt;
 
 
 	public Integer getArticle_no() {
@@ -48,12 +49,20 @@ public class ArticleDto {
 	public void setViewCnt(int viewCnt) {
 		this.viewCnt = viewCnt;
 	}
+	public int getReplyCnt() {
+		return replyCnt;
+	}
+	public void setReplyCnt(int replyCnt) {
+		this.replyCnt = replyCnt;
+	}
 	
 	@Override
 	public String toString() {
 		return "ArticleDto [article_no=" + article_no + ", title=" + title + ", content=" + content + ", writer="
-				+ writer + ", regDate=" + regDate + ", viewCnt=" + viewCnt + "]";
+				+ writer + ", regDate=" + regDate + ", viewCnt=" + viewCnt + ", replyCnt=" + replyCnt + "]";
 	}
+	
+
 	
 	
 	

@@ -211,9 +211,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <i class="fa fa-edit"> 수정</i>
                 </a>
             </span>
-            <span class="description"></span>
+            <span class="description">{{prettifyDate reg_date}}</span>
         </div>
-        <div class="oldReplyText">{{reply_text}}</div>
+        <div class="oldReplyText">{{{escape reply_text}}}</div>
         <br/>
     </div>
     {{/each}}

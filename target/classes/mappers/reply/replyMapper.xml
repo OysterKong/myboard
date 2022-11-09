@@ -58,6 +58,12 @@
         <result property="regDate" column="regdate"/>
         <result property="viewCnt" column="viewcnt"/>
     </resultMap>
+    
+    <select id="getArticleNo" resultType="int">
+	    SELECT article_no
+	    FROM tb_reply
+	    WHERE reply_no = #{reply_no}
+	</select>
 
 
 </mapper>

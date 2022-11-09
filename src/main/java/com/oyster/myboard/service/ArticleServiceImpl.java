@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.oyster.myboard.commons.paging.PageStandard;
 import com.oyster.myboard.commons.paging.SearchCondition;
@@ -22,9 +24,11 @@ public class ArticleServiceImpl implements ArticleService {
 		articleDao.create(dto);
 	}
 	
+	@Transactional(isolation = Isolation.READ_COMMITTED)
 	@Override
 	public ArticleDto read(Integer article_no) throws Exception {
-		return articleDao.read(article_no);
+		articleDao.updateViewCnt(article_no);
+	    return articleDao.read(article_no);
 	}
 	
 	@Override
@@ -62,6 +66,7 @@ public class ArticleServiceImpl implements ArticleService {
 	    return articleDao.countSearchedArticles(searchCondition);
 	}
 	
+
 	
 	
 

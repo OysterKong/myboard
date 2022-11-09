@@ -60,7 +60,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		                 <c:forEach items="${articles}" var="article">
 		                  <tr>
 		                    <td>${article.article_no}</td>
-		                    <td><a href="${path}/article/paging/search/read${pageMaker.makeSearch(pageMaker.standard.page)}&article_no=${article.article_no}">${article.title}</a></td>
+		                    <td><a href="${path}/article/paging/search/read${pageMaker.makeSearch(pageMaker.standard.page)}&article_no=${article.article_no}">
+		                    ${article.title}</a>
+		                    <span class="badge bg-teal"><i class="fas fa-comment"></i> + ${article.replyCnt}</span>
+		                    </td>
 		                    <td>${article.writer}</td>
 		                    <td><fmt:formatDate value="${article.regDate}" pattern="yyyy-MM-dd a HH:mm"/></td>
 		                    <td><span class="badge bg-success">${article.viewCnt}</span></td>

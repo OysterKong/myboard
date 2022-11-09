@@ -1,6 +1,8 @@
 package com.oyster.myboard.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,6 +74,21 @@ public class ArticleDAOImpl implements ArticleDAO {
 	@Override
 	public int countSearchedArticles(SearchCondition searchCondition) throws Exception {
 		return session.selectOne(namespace + "countSearchedArticles", searchCondition);
+	}
+	
+	@Override
+	public void updateReplyCnt(Integer article_no, int amount) throws Exception {
+
+	    Map<String, Object> paramMap = new HashMap<String, Object>();
+	    paramMap.put("article_no", article_no);
+	    paramMap.put("amount", amount);
+
+	    session.update(namespace + "updateReplyCnt",paramMap);
+	}
+	
+	@Override
+	public void updateViewCnt(Integer article_no) throws Exception {
+	    session.update(namespace + "updateViewCnt", article_no);
 	}
 
 

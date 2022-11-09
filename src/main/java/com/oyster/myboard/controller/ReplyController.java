@@ -31,7 +31,7 @@ public class ReplyController {
 		
 		ResponseEntity<String> entity = null;
 		try {
-			replyService.create(dto);
+			replyService.addReply(dto);
 			entity = new ResponseEntity<String>("regSuccess", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -107,7 +107,7 @@ public class ReplyController {
         
     	ResponseEntity<String> entity = null;
         try {
-            replyService.delete(reply_no);
+            replyService.removeReply(reply_no);
             entity = new ResponseEntity<String>("delSuccess", HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
