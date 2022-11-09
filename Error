@@ -22,3 +22,5 @@ A5.  root-context.xml 에서 수정완료
 
 Q6. Caused by: java.lang.IllegalStateException: Ambiguous mapping.
 A6. ambiguous 라는 단어 뜻과 같이 애매모호하여 매핑이 어렵다는 뜻, 컨트롤러에 @RequestMapping의 url이 중복되는지 확인 후 수정후 해결
+
+Q7. Modal 창이 뜨지 않아

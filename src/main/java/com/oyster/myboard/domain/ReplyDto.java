@@ -6,7 +6,7 @@ public class ReplyDto {
 	
 	private Integer reply_no;
 	private Integer article_no;
-	private String reply_next;
+	private String reply_text;
 	private String reply_writer;
 	private Date reg_date;
 	private Date update_date;
@@ -27,12 +27,12 @@ public class ReplyDto {
 		this.article_no = article_no;
 	}
 	
-	public String getReply_next() {
-		return reply_next;
+	public String getReply_text() {
+		return reply_text;
 	}
 	
-	public void setReply_next(String reply_next) {
-		this.reply_next = reply_next;
+	public void setReply_text(String reply_text) {
+		this.reply_text = reply_text;
 	}
 	
 	public String getReply_writer() {
@@ -61,7 +61,7 @@ public class ReplyDto {
 
 	@Override
 	public String toString() {
-		return "ReplyDto [reply_no=" + reply_no + ", article_no=" + article_no + ", reply_next=" + reply_next
+		return "ReplyDto [reply_no=" + reply_no + ", article_no=" + article_no + ", reply_text=" + reply_text
 				+ ", reply_writer=" + reply_writer + ", reg_date=" + reg_date + ", update_date=" + update_date + "]";
 	}
 	
