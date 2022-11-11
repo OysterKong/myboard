@@ -11,6 +11,9 @@ public class ReplyDto {
 	private Date reg_date;
 	private Date update_date;
 	
+	private UserDto userDto;
+	
+	
 	public Integer getReply_no() {
 		return reply_no;
 	}
@@ -59,11 +62,21 @@ public class ReplyDto {
 		this.update_date = update_date;
 	}
 
+	public UserDto getUserDto() {
+		return userDto;
+	}
+
+	public void setUserDto(UserDto userDto) {
+		this.userDto = userDto;
+	}
+
 	@Override
 	public String toString() {
 		return "ReplyDto [reply_no=" + reply_no + ", article_no=" + article_no + ", reply_text=" + reply_text
-				+ ", reply_writer=" + reply_writer + ", reg_date=" + reg_date + ", update_date=" + update_date + "]";
+				+ ", reply_writer=" + reply_writer + ", reg_date=" + reg_date + ", update_date=" + update_date
+				+ ", userDto=" + userDto + "]";
 	}
-	
+
+
 
 }

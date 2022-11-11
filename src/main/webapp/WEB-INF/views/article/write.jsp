@@ -24,7 +24,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Starter Page</h1>
+            <h1 class="m-0 text-dark">글쓰기 페이지</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -63,7 +63,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </div>
             </div>
             <div class="card-footer">
-                <button type="button" class="btn btn-primary"><i class="fa fa-list"></i> 목록</button>
+                <button type="button" class="btn btn-primary listBtn"><i class="fa fa-list"></i> 목록</button>
                 <div class="float-right">
                     <button type="reset" class="btn btn-warning"><i class="fa fa-reply"></i> 초기화</button>
                     <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> 저장</button>
@@ -103,7 +103,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 	$(document).ready(function () {
 		
-	    $(".btn-primary").on("click", function () {
+	    $(".listBtn").on("click", function () {
 	    	self.location = "${path}/article/list"
 	    });
 	

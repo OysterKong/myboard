@@ -23,7 +23,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Starter Page</h1>
+            <h1 class="m-0 text-dark">게시글 상세보기</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -56,7 +56,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		                <span class="username">
 		                    <a href="#">${article.writer}</a>
 		                </span>
-		                <span class="description"><fmt:formatDate pattern="yyyy-MM-dd" value="${article.regDate}"/></span>
+		                <span class="description"><fmt:formatDate pattern="yyyy-MM-dd a HH:mm" value="${article.regDate}"/></span>
 		            </div>
 		        </div>
 				<div class="card-footer">
@@ -68,38 +68,77 @@ scratch. This page gets rid of all links and provides the needed markup only.
 				        <input type="hidden" name="keyword" value="${searchCondition.keyword}">
 				    </form>
 				    <button type="submit" class="btn btn-primary listBtn"><i class="fa fa-list"></i> 목록</button>
-				    <div class="float-right">
-				        <button type="submit" class="btn btn-warning modBtn"><i class="fa fa-edit"></i> 수정</button>
-				        <button type="submit" class="btn btn-danger delBtn"><i class="fa fa-trash"></i> 삭제</button>
-				    </div>
+				    <c:if test="${login.userId == article.writer}">
+					    <div class="float-right">
+					        <button type="submit" class="btn btn-warning modBtn"><i class="fa fa-edit"></i> 수정</button>
+					        <button type="submit" class="btn btn-danger delBtn"><i class="fa fa-trash"></i> 삭제</button>
+					    </div>
+				    </c:if>
 				</div>			
 		    </div>
 		</div>
 			
-		<div class="col-lg-12">
-		  <div class="card">
-			<div class="card-header with-border">
-	            <h3 class="card-title">댓글 작성</h3>
-	        </div>
-	      <div class="card-body">
-	        <form class="form-horizontal">
-	          <div class="row">
-	            <div class="form-group col-sm-8">
-	              <input class="form-control input-sm" id="newReplyText" type="text" placeholder="댓글 내용을 입력해주세요...">
-	            </div>
-	            <div class="form-group col-sm-2">
-	              <input class="form-control input-sm" id="newReplyWriter" type="text" placeholder="작성자">
-				</div>
-				<div class="form-group col-sm-2">
-				  <button type="button" class="btn btn-primary btn-sm btn-block replyAddBtn">
-				<i class="fa fa-save"></i> 저장
-				</button>
-				</div>
+	
+	<div class="col-lg-12">
+	  <div class="card">
+	    <div class="card-header with-border">
+	      <h3 class="card-title">댓글 작성</h3>
+	    </div>
+		<div class="card-body">
+		    <c:if test="${not empty login}">
+		      <form class="form-horizontal">
+		        <div class="row">
+		          <div class="form-group col-sm-10">
+		            <textarea class="form-control input-sm" id="newReplyText" type="text" placeholder="댓글 입력을 입력하세요."></textarea>
+		          </div>
+		          <div class="form-group col-sm-2" hidden>
+		            <input class="form-control input-sm" id="newReplyWriter" type="text" value="${login.userId}" readonly>
+		          </div>
+		          <div class="form-group col-sm-2">
+		            <button type="button" class="btn btn-primary btn-sm btn-block replyAddBtn"> 
+		            	<i class="fa fa-save"></i> 댓글 등록
+		          	</button>
+		          </div>
+		        </div>
+		      </form>
+		    </c:if>
+		    <c:if test="${empty login}">
+		      <a href="${path}/user/login" class="btn btn-default btn-block" role="button">
+		      	<i class="fa fa-edit"></i> 로그인 한 사용자만 댓글 등록이 가능합니다.
+		      </a>
+		     </c:if>
+		 </div>
+	  </div>
+	</div>
+	     <div class="col-lg-12">
+   		   <div class="card card-primary card-outline collapsed-box">
+			 <%--댓글 유무 / 댓글 갯수 / 댓글 펼치기, 접기--%>
+	          <div class="card-header with-border">
+			    <a href="" class="link-black text-lg"><i class="fas fa-comments margin-r-5 replyCount"></i></a>
+			    <div class="card-tools">
+			      <button type="button" class="btn btn-card-tool"  data-widget="collapse">
+			        <i class="fa fa-plus"></i>
+			      </button>
+			    </div>
 			  </div>
-			</form>	
-	       </div>
-	      </div>
+			<%--댓글 목록--%>
+			<div class="card-body repliesDiv">
+			  
+			</div>
+			<%--댓글 페이징--%>
+			<div class="card-footer">
+			  <nav aria-label="Contacts Page Navigation">
+			    <ul class="pagination pagination-sm no-margin justify-content-center m-0">
+			
+			    </ul>
+			  </nav>
+			 </div>
+			</div>
 	     </div>
+	  
+	  
+	  
+	  
 	     
 			     <%--댓글 수정 modal 영역--%>
 		<div class="modal fade" id="modModal">
@@ -144,34 +183,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		        </div>
 		    </div>
 		</div>
-	     
-   		    
-   		<div class="col-lg-12">
-   		  <div class="card card-primary card-outline collapsed-box">
-			 <%--댓글 유무 / 댓글 갯수 / 댓글 펼치기, 접기--%>
-	        <div class="card-header">
-			  <a href="" class="link-black text-lg"><i class="fas fa-comments margin-r-5 replyCount"></i></a>
-			<div class="card-tools">
-			  <button type="button" class="btn btn-card-tool"  data-widget="collapse">
-			    <i class="fa fa-plus"></i>
-			  </button>
-			</div>
-			</div>
-			<%--댓글 목록--%>
-			<div class="card-body repliesDiv">
-			  
-			</div>
-			<%--댓글 페이징--%>
-			<div class="card-footer">
-			  <nav aria-label="Contacts Page Navigation">
-			    <ul class="pagination pagination-sm no-margin justify-content-center m-0">
-			
-			    </ul>
-			  </nav>
-			 </div>
-			</div>
-	     </div>
-
+	 
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content -->
@@ -192,11 +204,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <%@ include file="../../include/main_footer.jsp" %>
  </div>
 <!-- ./wrapper -->
-
-<!-- REQUIRED SCRIPTS -->
- <%@ include file="../../include/plugin_js.jsp" %>
+<%@ include file="../../include/plugin_js.jsp" %>
 </body>
-
+<!-- REQUIRED SCRIPTS -->
 <script id="replyTemplate" type="text/x-handlebars-template">
     {{#each.}}
     <div class="post replyDiv" data-reply_no={{reply_no}}>
@@ -204,16 +214,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <img class="img-circle img-bordered-sm" src="${path}/dist/img/user1-128x128.jpg" alt="user image">
             <span class="username">
                 <a href="#">{{reply_writer}}</a>
+				{{#eqReplyWriter reply_writer}}
                 <a href="#" class="float-right btn-box-tool replyDelBtn" data-toggle="modal" data-target="#delModal">
                     <i class="fa fa-times"> 삭제</i>
                 </a>
                 <a href="#" class="float-right btn-box-tool replyModBtn" data-toggle="modal" data-target="#modModal">
                     <i class="fa fa-edit"> 수정</i>
                 </a>
+ 				{{/eqReplyWriter}}
             </span>
             <span class="description">{{prettifyDate reg_date}}</span>
         </div>
-        <div class="oldReplyText">{{{escape reply_text}}}</div>
+        <div class="oldReplyText">{{reply_text}}</div>
         <br/>
     </div>
     {{/each}}
@@ -233,6 +245,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	    });
 
 	    $(".delBtn").on("click", function () {
+	    	
+	    	var replyCnt = $(".replyDiv").length;
+	    	if(replyCnt > 0) {
+	    		alert("댓글이 달린 게시물은 삭제가 불가능합니다.");
+	    		return;
+	    	}
+	 
 	        formObj.attr("action", "${path}/article/paging/search/remove");
 	        formObj.submit();
 	    });
@@ -269,9 +288,25 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	        minutes < 10 ? minutes = '0' + minutes : minutes;
 	        return year + "-" + month + "-" + date + " " + hours + ":" + minutes;
 	    });
+	    
+	    // 댓글 등록 및 삭제기능 로그인시만 허용
+	    Handlebars.registerHelper("eqReplyWriter", function (reply_writer, block) {
+	        var accum = "";
+	        if (reply_writer === "${login.userId}") {
+	            accum += block.fn();
+	        }
+	        return accum;
+	    });
 
 	    // 댓글 목록 함수 호출
 	    getReplies("${path}/replies/" + article_no + "/" + replyPageNum);
+	    
+	    // 댓글 페이지 번호 클릭 이벤트
+	    $(".pagination").on("click", "li a", function (event) {
+	        event.preventDefault();
+	        replyPageNum = $(this).attr("href");
+	        getReplies("${path}/replies/" + article_no + "/" + replyPageNum);
+	    });
 
 	    // 댓글 목록 함수
 	    function getReplies(repliesUri) {
@@ -335,12 +370,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	        targetArea.html(str);
 	    }
 
-	    // 댓글 페이지 번호 클릭 이벤트
-	    $(".pagination").on("click", "li a", function (event) {
-	        event.preventDefault();
-	        replyPageNum = $(this).attr("href");
-	        getReplies("${path}/replies/" + article_no + "/" + replyPageNum);
-	    });
+
 		
 	 	// 댓글 저장 버튼 클릭 이벤트
 	    $(".replyAddBtn").on("click", function () {

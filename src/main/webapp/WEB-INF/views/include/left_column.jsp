@@ -10,12 +10,25 @@
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="${path}/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-        </div>
-        <div class="info">
-          <a href="#" class="d-block">OysterKong</a>
-        </div>
+        <c:if test="${empty login}">
+	        <div class="image">
+	          <img src="${path}/dist/img/user1-128x128.jpg" class="img-circle elevation-2" alt="User Image">
+	        </div>
+	        <div class="info">
+                <%-- Status --%>
+            	<a href="#"><i class="fa fa-circle text-danger"></i> Guest</a>
+	        </div>
+        </c:if>
+        
+        <c:if test="${not empty login}">
+	        <div class="image">
+	          <img src="${path}/dist/img/user1-128x128.jpg" class="img-circle elevation-2" alt="User Image">
+	        </div>
+	        <div class="info">
+                <%-- Status --%>
+            	<a href="#"><i class="d-block"></i> ${login.userName}</a>
+	        </div>
+        </c:if>
       </div>
 
       <!-- Sidebar Menu -->

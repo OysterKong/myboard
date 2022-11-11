@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
@@ -22,7 +23,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Starter Page</h1>
+            <h1 class="m-0 text-dark">OysterKong 의 게시판에 오신것을 환영합니다.</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -42,15 +43,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <div class="col-lg-6">
             <div class="card">
               <div class="card-body">
-                <h5 class="card-title">Card title</h5>
+                <h5 class="card-title">Basic CRUD Board</h5>
 
                 <p class="card-text">
-                  Some quick example text to build on the card title and make up the bulk of the card's
-                  content.
+                  기본적인 CRUD 기능만 구현되있는 게시판입니다.
                 </p>
 
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
+                <a href="${path}/article/write" class="card-link">게시글 작성하기</a>
+                <a href="${path}/article/list" class="card-link">게시글 목록으로</a>
               </div>
             </div>
 
@@ -71,7 +71,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <div class="col-lg-6">
             <div class="card">
               <div class="card-header">
-                <h5 class="m-0">Featured</h5>
+                <h5 class="m-0">Paging CRUD Board</h5>
               </div>
               <div class="card-body">
                 <h6 class="card-title">Special title treatment</h6>

@@ -25,6 +25,33 @@
 	
 	<context:component-scan base-package="com.oyster.myboard" />
 	
+	<beans:bean id="loginInterceptor" class="com.oyster.myboard.commons.interceptor.LoginInterceptor"/>
+		<beans:bean id="authInterceptor" class="com.oyster.myboard.commons.interceptor.AuthInterceptor"/>
+		<beans:bean id="rememberMeInterceptor" class="com.oyster.myboard.commons.interceptor.RememberMeInterceptor"/>
+		<beans:bean id="loginAfterInterceptor" class="com.oyster.myboard.commons.interceptor.LoginAfterInterceptor"/>
+		<interceptors>
+        <interceptor>
+            <mapping path="/user/loginPost"/>
+            <beans:ref bean="loginInterceptor"/>
+        </interceptor>
+        <interceptor>
+            <mapping path="/article/paging/search/write"/>
+            <mapping path="/article/paging/search/modify"/>
+            <mapping path="/article/paging/search/remove"/>
+            <mapping path="/user/info"/>
+            <beans:ref bean="authInterceptor"/>
+        </interceptor>
+        <interceptor>
+            <mapping path="/**/"/>
+            <beans:ref bean="rememberMeInterceptor"/>
+        </interceptor>
+        <interceptor>
+            <mapping path="/user/login"/>
+            <mapping path="/user/register"/>
+            <beans:ref bean="loginAfterInterceptor"/>
+        </interceptor>
+    </interceptors>
+	
 	
 	
 </beans:beans>

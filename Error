@@ -5,7 +5,7 @@ Q2. ### Cause: org.springframework.jdbc.CannotGetJdbcConnectionException: Could 
 nested exception is java.sql.SQLException: Unable to load authentication plugin 'caching_sha2_password'.]을(를) 발생시켰습니다.
 java.sql.SQLException: Unable to load authentication plugin 'caching_sha2_password'.
 A2. pom.xml 에서 MySQL라이브러리의 버전이 내가 사용하는 MySQL Workbench 버전과 맞지 않아서 발생하는 오류.  
-예제에서는 MySQL이 5버전이라 pom.xml에 5로 설정했으나 실제로 내가 사용하는 MySQL Workbench는 8.0 버전으로 일치하지 않아 발생하는 오류
+예제에서는 MySQL이 5버전이라 pom.xml에 5로 설정했으나 실제로 내가 사용하는 MySQL Workbench는 8.0 버전으로 일치하지 않아 발생하는 오류,  버전을 수정 후 정상
 
 Q3.  Uncaught ReferenceError: $ is not defined   (jQuery 사용 시)
 A3.  jsp 에서 jQuery 사용위한 기능 코드를 넣어놓고 정작 jQuery 사용위한 코드를 선언해주지 않아 발생했던 오류.
@@ -23,4 +23,9 @@ A5.  root-context.xml 에서 수정완료
 Q6. Caused by: java.lang.IllegalStateException: Ambiguous mapping.
 A6. ambiguous 라는 단어 뜻과 같이 애매모호하여 매핑이 어렵다는 뜻, 컨트롤러에 @RequestMapping의 url이 중복되는지 확인 후 수정후 해결
 
-Q7. Modal 창이 뜨지 않아
+Q7. 부트스트랩에서 Modal 팝업 창이 정상적으로 작동하지 않았던 문제
+A7. 각 jsp에서 참조하여 include 되는 plugin_js.jsp 에서 부트스트랩 경로설정이 잘못되있어서 모달 팝업 기능을 사용하지 못했던 것, 경로 알맞게 수정 후 정상작동
+
+Q8. Public Key Retrieval is not allowed
+A8. root-context.xml 에서 allowPublicKeyRetrieval=true 을 붙여준 뒤 해결 ( MySQL 8.0 이상에서 useSSL=false 조건 시 allowPublicKeyRetrieval=true 설정이 없으면 발생 )
+ <property name="url" value="jdbc:log4jdbc:mysql://127.0.0.1:3306/myboard?serverTimezone=Asia/Seoul&amp;useSSL=false&amp;allowPublicKeyRetrieval=true"></property>

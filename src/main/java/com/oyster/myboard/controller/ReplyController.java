@@ -80,7 +80,7 @@ public class ReplyController {
     		
     	} catch (Exception e) {
     		e.printStackTrace();
-    		entity = new ResponseEntity<Map<String,Object>>(HttpStatus.BAD_REQUEST);
+    		entity = new ResponseEntity<Map<String,Object>>(HttpStatus.OK);
     	}
     	return entity;
     }

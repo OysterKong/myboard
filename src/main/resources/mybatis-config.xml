@@ -8,7 +8,7 @@
 	<typeAliases>
  		<typeAlias type="com.oyster.myboard.domain.ArticleDto" alias="ArticleDto"/>
  		<typeAlias type="com.oyster.myboard.domain.ReplyDto" alias="ReplyDto"/>
-
+		<typeAlias type="com.oyster.myboard.domain.UserDto" alias="UserDto"/>
 	</typeAliases>
 	
 </configuration>
