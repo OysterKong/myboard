@@ -25,6 +25,7 @@
 	
 	<context:component-scan base-package="com.oyster.myboard" />
 	
+	<!-- 인터셉터 사용위해 등록 -->
 	<beans:bean id="loginInterceptor" class="com.oyster.myboard.commons.interceptor.LoginInterceptor"/>
 		<beans:bean id="authInterceptor" class="com.oyster.myboard.commons.interceptor.AuthInterceptor"/>
 		<beans:bean id="rememberMeInterceptor" class="com.oyster.myboard.commons.interceptor.RememberMeInterceptor"/>
@@ -52,6 +53,9 @@
         </interceptor>
     </interceptors>
 	
-	
+	<!-- 파일 업로드 기능 사용위해 등록 -->
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+      <beans:property name="maxUploadSize" value="10485760"/><!-- 10mb 의미 = 10 * 1024 * 1024 = 10485760 -->
+	</beans:bean>
 	
 </beans:beans>

@@ -41,15 +41,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <div class="container-fluid">
       
 		 <div class="col-lg-12">
-		 	<div class="box box-primary"><!-- 추가부분  -->
 		    <div class="card">
 		        <div class="card-header">
 		            <h3 class="card-title">글제목 : ${article.title}</h3>
-		        </div>
+		        </div>  
 		        <div class="card-body" style="height: 700px">
 		            ${article.content}
 		        </div>
-		       </div>                      <!-- 추가부분  -->
+		        
+		            <%--업로드 파일 정보 영역--%>
+						<div class="card-footer uploadFiles">
+							<ul class="mailbox-attachments clearfix uploadedList"></ul>
+						</div>
+		            <%--업로드 파일 정보 영역--%>
+		                   
 		        <div class="card-footer">
 		            <div class="user-block">
 		                <img class="img-circle img-bordered-sm" src="${path}/dist/img/user1-128x128.jpg" alt="user image">
@@ -74,9 +79,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 					        <button type="submit" class="btn btn-danger delBtn"><i class="fa fa-trash"></i> 삭제</button>
 					    </div>
 				    </c:if>
-				</div>			
-		    </div>
-		</div>
+				</div>
+			 </div>			
+		 </div>
+		 
 			
 	
 	<div class="col-lg-12">
@@ -135,10 +141,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 			 </div>
 			</div>
 	     </div>
-	  
-	  
-	  
-	  
+
 	     
 			     <%--댓글 수정 modal 영역--%>
 		<div class="modal fade" id="modModal">
@@ -205,7 +208,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
  </div>
 <!-- ./wrapper -->
 <%@ include file="../../include/plugin_js.jsp" %>
-</body>
+
 <!-- REQUIRED SCRIPTS -->
 <script id="replyTemplate" type="text/x-handlebars-template">
     {{#each.}}
@@ -231,6 +234,26 @@ scratch. This page gets rid of all links and provides the needed markup only.
     {{/each}}
 </script>
 
+<%--첨부파일 하나의 영역--%>
+<%--이미지--%>
+<script id="templatePhotoAttach" type="text/x-handlebars-template">
+    <li>
+        <span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment"></span>
+        <div class="mailbox-attachment-info">
+            <a href="{{getLink}}" class="mailbox-attachment-name" data-lightbox="uploadImages"><i class="fas fa-camera"></i> {{fileName}}</a>
+        </div>
+    </li>
+</script>
+<%--일반 파일--%>
+<script id="templateFileAttach" type="text/x-handlebars-template">
+    <li>
+        <span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment"></span>
+        <div class="mailbox-attachment-info">
+            <a href="{{getLink}}" class="mailbox-attachment-name"><i class="fas fa-paperclip"></i> {{fileName}}</a>
+        </div>
+    </li>
+</script>
+<script type="text/javascript" src="${path}/resources/dist/js/upload.js"></script>
 <script>
 	
 	$(document).ready(function () {
@@ -251,6 +274,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	    		alert("댓글이 달린 게시물은 삭제가 불가능합니다.");
 	    		return;
 	    	}
+	    	
+            var arr = [];
+            $(".uploadedList li").each(function () {
+                arr.push($(this).attr("data-src"));
+            });
+            if (arr.length > 0) {
+                $.post("/article/file/deleteAll", {files: arr}, function () {
+                });
+            }
 	 
 	        formObj.attr("action", "${path}/article/paging/search/remove");
 	        formObj.submit();
@@ -300,6 +332,28 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 	    // 댓글 목록 함수 호출
 	    getReplies("${path}/replies/" + article_no + "/" + replyPageNum);
+	    
+	    
+	    
+		var article_no = ${article.article_no}; // 현재 게시글 번호
+	    var templatePhotoAttach = Handlebars.compile($("#templatePhotoAttach").html()); // 이미지 Template
+	    var templateFileAttach = Handlebars.compile($("#templateFileAttach").html());   // 일반파일 Template
+	    
+	    /*================================================게시판 업로드 첨부파일 목록관련===================================*/
+	    $.getJSON("/myboard/file/list/" + article_no, function (list) {
+	        $(list).each(function () {
+	            var fileInfo = getFileInfo(this);
+	            // 이미지 파일일 경우
+	            if (fileInfo.file_name.substr(12, 2) == "s_") {
+	                var html = templatePhotoAttach(fileInfo);
+	                // 이미지 파일이 아닐 경우
+	            } else {
+	                html = templateFileAttach(fileInfo);
+	            }
+	            $(".uploadedList").append(html);
+	        })
+	    });
+	    
 	    
 	    // 댓글 페이지 번호 클릭 이벤트
 	    $(".pagination").on("click", "li a", function (event) {
@@ -463,8 +517,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	            }
 	        });
 	    });
+ 
 	});
 	
 	
 </script>
+</body>
 </html>

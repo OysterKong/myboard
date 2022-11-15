@@ -53,6 +53,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 			                    <th>제목</th>
 			                    <th style="width: 100px">작성자</th>
 			                    <th style="width: 150px">작성시간</th>
+			                    <th style="width: 60px">파일</th>
 			                    <th style="width: 60px">조회</th>
 			                </tr>
 		                </thead>
@@ -66,6 +67,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		                    </td>
 		                    <td>${article.writer}</td>
 		                    <td><fmt:formatDate value="${article.regDate}" pattern="yyyy-MM-dd a HH:mm"/></td>
+		                    <td><span class="badge bg-red"><i class="fa fa-file"></i>${article.fileCnt}</span></td>
 		                    <td><span class="badge bg-success">${article.viewCnt}</span></td>
 		                  </tr>
 		                 </c:forEach>

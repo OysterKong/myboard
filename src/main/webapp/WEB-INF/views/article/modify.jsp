@@ -93,10 +93,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <%@ include file="../include/main_footer.jsp" %>
  </div>
 <!-- ./wrapper -->
-
-<!-- REQUIRED SCRIPTS -->
  <%@ include file="../include/plugin_js.jsp" %>
-</body>
+<!-- REQUIRED SCRIPTS -->
 <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 <script>
 
@@ -121,4 +119,5 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	});
 
 </script>
+</body>
 </html>

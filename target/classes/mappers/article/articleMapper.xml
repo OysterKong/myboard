@@ -5,20 +5,20 @@
 
 <mapper namespace="com.oyster.myboard.mappers.article.ArticleMapper">
 
-	<insert id="create">
-		INSERT INTO tb_article (title, content, writer)
-		VALUES (#{title}, #{content}, #{writer})
+	<insert id="create" useGeneratedKeys="true" keyProperty="article_no">
+		INSERT INTO tb_article (title, content, writer, file_cnt)
+		VALUES (#{title}, #{content}, #{writer}, #{fileCnt})
 	</insert>
 	
 	<select id="read" resultMap="ArticleResultMap">
-		SELECT article_no, title, content, writer, regdate, viewcnt
+		SELECT article_no, title, content, writer, regdate, viewcnt, file_cnt
 		FROM tb_article
 		WHERE article_no = #{article_no}
 	</select>
 	
 	<update id="update">
 		UPDATE tb_article
-		SET title = #{title}, content = #{content}
+		SET title = #{title}, content = #{content}, file_cnt = #{fileCnt}
 		WHERE article_no = #{article_no}
 	</update>
 	
@@ -29,7 +29,7 @@
 	
 	<select id="listAll" resultType="ArticleDto">
 		<![CDATA[
-		SELECT article_no, title, content, writer, regdate, viewcnt
+		SELECT article_no, title, content, writer, regdate, viewcnt, file_cnt
 		FROM tb_article
 		WHERE article_no > 0
 		ORDER BY article_no DESC, regdate DESC
@@ -38,7 +38,7 @@
 	
 	<select id="listPaging" resultMap="ArticleResultMap">
 	    <![CDATA[
-	    SELECT article_no, title, content, writer, regdate, viewcnt
+	    SELECT article_no, title, content, writer, regdate, viewcnt, file_cnt
 	    FROM tb_article
 	    WHERE article_no > 0
 	    ORDER BY article_no DESC, regdate DESC
@@ -48,7 +48,7 @@
 	
 	<select id="listPageStandard" resultMap="ArticleResultMap">
 	    <![CDATA[
-	    SELECT article_no, title, content, writer, regdate, viewcnt
+	    SELECT article_no, title, content, writer, regdate, viewcnt, file_cnt
 	    FROM tb_article
 	    WHERE article_no > 0
 	    ORDER BY article_no DESC, regdate DESC
@@ -72,11 +72,12 @@
         <result property="regDate" column="regdate" />
         <result property="viewCnt" column="viewcnt" />
         <result property="replyCnt" column="reply_cnt" />
+        <result property="fileCnt" column="file_cnt" />
     </resultMap>
     
     <select id="listSearch" resultMap="ArticleResultMap">
 	    <![CDATA[
-	    SELECT article_no, title, content, writer, regdate, viewcnt, reply_cnt
+	    SELECT article_no, title, content, writer, regdate, viewcnt, reply_cnt, file_cnt
 	    FROM tb_article
 	    WHERE article_no > 0
 	    ]]>

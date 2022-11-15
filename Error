@@ -29,3 +29,7 @@ A7. 각 jsp에서 참조하여 include 되는 plugin_js.jsp 에서 부트스트�
 Q8. Public Key Retrieval is not allowed
 A8. root-context.xml 에서 allowPublicKeyRetrieval=true 을 붙여준 뒤 해결 ( MySQL 8.0 이상에서 useSSL=false 조건 시 allowPublicKeyRetrieval=true 설정이 없으면 발생 )
  <property name="url" value="jdbc:log4jdbc:mysql://127.0.0.1:3306/myboard?serverTimezone=Asia/Seoul&amp;useSSL=false&amp;allowPublicKeyRetrieval=true"></property>
+
+Q9. java.sql.SQLIntegrityConstraintViolationException: Cannot add or update a child row: a foreign key constraint fails
+ (`myboard`.`tb_article_file`, CONSTRAINT `fk_article_file` FOREIGN KEY (`article_no`) REFERENCES `tb_article` (`article_no`))
+A9. 
