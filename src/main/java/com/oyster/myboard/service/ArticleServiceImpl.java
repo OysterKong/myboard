@@ -61,19 +61,15 @@ public class ArticleServiceImpl implements ArticleService {
 		
 		String[] files = dto.getFiles();
 		
-		System.out.println("===files==== " + files);
-		
 		if(files == null) {
 			dto.setFileCnt(0);
 			return;
 		}
 		
 		dto.setFileCnt(files.length);
-		System.out.println("files.length 찍어보기 = ==================" + files.length);
 		
 		articleDao.update(dto);
 		for(String fileName : files) {
-			System.out.println("fileName 찍어보기 = ==================" + fileName);
 			articleFileDao.replaceAttach(fileName, article_no);
 		}
 	}

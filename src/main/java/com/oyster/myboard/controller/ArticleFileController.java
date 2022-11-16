@@ -59,7 +59,6 @@ public class ArticleFileController {
         ResponseEntity<List<String>> entity = null;
         try {
             entity = new ResponseEntity<List<String>>(articleFileService.getAttach(article_no), HttpStatus.OK);
-            System.out.println("entity 안에 무엇이 담겼는지 확인 ==============" + entity);
         } catch (Exception e) {
             e.printStackTrace();
             entity = new ResponseEntity<List<String>>(HttpStatus.BAD_REQUEST);

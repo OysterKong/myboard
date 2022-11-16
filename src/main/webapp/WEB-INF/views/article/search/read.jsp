@@ -341,6 +341,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	    
 	    /*================================================게시판 업로드 첨부파일 목록관련===================================*/
 	    $.getJSON("/myboard/file/list/" + article_no, function (list) {
+	    	if (list.length === 0) {
+	            $(".uploadedList").html("<span class='noAttach'>첨부파일이 없습니다.</span>");
+	        }
 	        $(list).each(function () {
 	            var fileInfo = getFileInfo(this);
 	            // 이미지 파일일 경우

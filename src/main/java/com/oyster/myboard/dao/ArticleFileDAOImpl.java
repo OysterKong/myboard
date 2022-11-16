@@ -58,8 +58,5 @@ public class ArticleFileDAOImpl implements ArticleFileDAO {
     	session.update(namespace + "updateAttachCnt", article_no);
     }
 	
-	
-	
-	
 
 }
