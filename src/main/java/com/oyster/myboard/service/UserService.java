@@ -26,7 +26,7 @@ public interface UserService {
 	//회원비밀번호 수정처리
 	void modifyPw(UserDto dto) throws Exception;
 	
-	//회원 프로필 사진 수정
-	void modifyUserImage(String userId, String userImg) throws Exception;
+	//회원탈퇴
+	void withdraw(UserDto dto) throws Exception;
 
 }

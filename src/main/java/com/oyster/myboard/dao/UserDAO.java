@@ -28,10 +28,10 @@ public interface UserDAO {
 	//회원비밀번호 수정
 	void updatePw(UserDto dto) throws Exception;
 	
-	//회원 프로필 사진 수정
-	void updateUserImage(String userId, String userImg) throws Exception;
-	
 	//회원 최근 로그인 일자 갱신
 	void updateLoginDate(String userId) throws Exception;
+	
+	//회원탈퇴
+	void withdraw(UserDto dto) throws Exception;
 
 }

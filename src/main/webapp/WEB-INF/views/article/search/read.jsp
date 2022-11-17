@@ -57,7 +57,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		                   
 		        <div class="card-footer">
 		            <div class="user-block">
-		                <img class="img-circle img-bordered-sm" src="${path}/dist/img/user1-128x128.jpg" alt="user image">
+		                <img class="img-circle img-bordered-sm" src="${path}/dist/img/profile/user/default-user.png" alt="user image">
 		                <span class="username">
 		                    <a href="#">${article.writer}</a>
 		                </span>
@@ -214,7 +214,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     {{#each.}}
     <div class="post replyDiv" data-reply_no={{reply_no}}>
         <div class="user-block">
-            <img class="img-circle img-bordered-sm" src="${path}/dist/img/user1-128x128.jpg" alt="user image">
+            <img class="img-circle img-bordered-sm" src="${path}/dist/img/profile/user/default-user.png" alt="user image">
             <span class="username">
                 <a href="#">{{reply_writer}}</a>
 				{{#eqReplyWriter reply_writer}}

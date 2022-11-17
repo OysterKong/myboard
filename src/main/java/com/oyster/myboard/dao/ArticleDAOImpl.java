@@ -97,11 +97,6 @@ public class ArticleDAOImpl implements ArticleDAO {
 		return session.selectList(namespace + "userBoardList", userId);
 	}
 	
-	//회원 프로필 사진 수정
-	@Override
-	public void updateWriterImg(ArticleDto dto) throws Exception {
-		session.update(namespace + "updateWriterImg", dto);
-	}
 
 
 }

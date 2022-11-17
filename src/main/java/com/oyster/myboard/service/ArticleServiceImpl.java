@@ -33,13 +33,11 @@ public class ArticleServiceImpl implements ArticleService {
 		
 		if(files == null) {
 			articleDao.create(dto);
-			articleDao.updateWriterImg(dto);
 			return;
 		}
 		
 		dto.setFileCnt(files.length);
 		articleDao.create(dto);
-		articleDao.updateWriterImg(dto);
 		logger.info("Create - "+dto.toString());
 		Integer article_no = dto.getArticle_no();
 		

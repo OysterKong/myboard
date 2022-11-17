@@ -6,10 +6,12 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.oyster.myboard.domain.LoginDto;
 import com.oyster.myboard.domain.UserDto;
 
+@Repository
 public class UserDAOImpl implements UserDAO {
 	
 	@Autowired
@@ -62,21 +64,19 @@ public class UserDAOImpl implements UserDAO {
 		session.update(namespace + "updatePw", dto);
 	}
 	
-	//회원 프로필사진 수정
-	@Override
-	public void updateUserImage(String userId, String userImg) throws Exception {
-		Map<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("userId", userId);
-		paramMap.put("userImg", userImg);
-		session.update(namespace + "updateUserImage", paramMap);
-	}
-	
 	//로그인 일자 갱신
 	@Override
 	public void updateLoginDate(String userId) throws Exception {
 		session.update(namespace + "updateLoginDate", userId);
 	}
 	
-
-
+	//회원탈퇴
+	@Override
+	public void withdraw(UserDto dto) throws Exception {
+		session.delete(namespace + "userWithdraw", dto);
+	}
+	
+	
+	
+	
 }

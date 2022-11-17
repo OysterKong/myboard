@@ -41,25 +41,25 @@ public class UserInfoController {
 	@Resource(name = "uimagePath")
 	private String uimagePath;
 	
-	// 회원 프로필 이미지 수정
-	@RequestMapping(value = "/modify/image", method = RequestMethod.POST)
-	public String userImageModify(String userId, MultipartFile file, HttpSession session, RedirectAttributes rattr) throws Exception {
-		if(file == null) {
-			rattr.addFlashAttribute("msg", "FAIL");
-			return "redirect:/user/profile";
-		}
-		String uploadFile = UploadFileUtils.uploadFile(uimagePath, file.getOriginalFilename(), file.getBytes());
-		String front = uploadFile.substring(0, 12);
-		String end = uploadFile.substring(14);
-		String userImg = front + end;
-		userService.modifyUserImage(userId, userImg);
-		Object userObj = session.getAttribute("login");
-		UserDto userDto = (UserDto) userObj;
-		userDto.setUserImg(userImg);
-		session.setAttribute("login", userDto);
-		rattr.addFlashAttribute("msg", "SUCCESS");
-		return "redirect:/user/profile";
-	}
+//	// 회원 프로필 이미지 수정
+//	@RequestMapping(value = "/modify/image", method = RequestMethod.POST)
+//	public String userImageModify(String userId, MultipartFile file, HttpSession session, RedirectAttributes rattr) throws Exception {
+//		if(file == null) {
+//			rattr.addFlashAttribute("msg", "FAIL");
+//			return "redirect:/user/profile";
+//		}
+//		String uploadFile = UploadFileUtils.uploadFile(uimagePath, file.getOriginalFilename(), file.getBytes());
+//		String front = uploadFile.substring(0, 12);
+//		String end = uploadFile.substring(14);
+//		String userImg = front + end;
+//		userService.modifyUserImage(userId, userImg);
+//		Object userObj = session.getAttribute("login");
+//		UserDto userDto = (UserDto) userObj;
+//		userDto.setUserImg(userImg);
+//		session.setAttribute("login", userDto);
+//		rattr.addFlashAttribute("msg", "SUCCESS");
+//		return "redirect:/user/profile";
+//	}
 	
 	// 회원정보 수정
 	@RequestMapping(value = "/modify/info", method = RequestMethod.POST)
@@ -126,6 +126,24 @@ public class UserInfoController {
 		
 		return "user/profile";
 	}
+	
+	//회원탈퇴
+	@RequestMapping(value = "/withdraw/userInfo", method = RequestMethod.POST)
+	public String withdraw(UserDto dto, HttpSession session, RedirectAttributes rattr, Model m,
+							@RequestParam("userPw") String userPw) throws Exception {
+		dto = (UserDto) session.getAttribute("login");
+		
+		if(!BCrypt.checkpw(userPw, dto.getUserPw())) {
+			rattr.addFlashAttribute("msg", "FAILURE");
+			return "redirect:/user/profile";
+		}
+
+		userService.withdraw(dto);
+		session.invalidate();
+		m.addAttribute("msg", "WITHDRAW SUCCESS");
+		return "home";
+	}
+	
 	
 	
 }

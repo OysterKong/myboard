@@ -73,21 +73,7 @@
         <result property="viewCnt" column="viewcnt" />
         <result property="replyCnt" column="reply_cnt" />
         <result property="fileCnt" column="file_cnt" />
-        <result property="writerImg" column="writerImg" />
-  <association property="userDto" resultMap="userDtoResultMap"/>  
     </resultMap>
-    
-    <resultMap id="userDtoResultMap" type="UserDto">
-	  <id property="userId" column="user_id"/>
-	  <result property="userPw" column="user_pw"/>
-	  <result property="userName" column="user_name"/>
-	  <result property="userEmail" column="user_email"/>
-	  <result property="userJoinDate" column="user_join_date"/>
-	  <result property="userLoginDate" column="user_login_date"/>
-	  <result property="userSignature" column="user_signature"/>
-	  <result property="userImg" column="user_img"/>
-	  <result property="userPoint" column="user_point"/>
-	</resultMap>
     
     <select id="listSearch" resultMap="ArticleResultMap">
 	    <![CDATA[
@@ -156,11 +142,6 @@
 	    WHERE article_no = #{article_no}
 	</update>
 	
-	<update id="updateWriterImg" >
-	  UPDATE tb_article
-	  SET writerImg = (SELECT user_img FROM tb_user WHERE user_id = #{writer})
-	  WHERE article_no = #{article_no}
-	</update>
 
 	<select id="userBoardList" resultType="ArticleDto">
 	  SELECT *

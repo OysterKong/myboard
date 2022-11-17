@@ -81,7 +81,7 @@ data-target="#userInfoModal"> <i class="fa fa-info-circle">
 data-target="#userPwModal"> <i
 class="fa fa-question-circle"> 비밀번호 수정</i>
 </a> <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
-data-target="#userOutModal"> <i class="fa fa-user-times">
+data-target="#userWithdrawal"> <i class="fa fa-user-times">
 회원 탈퇴</i>
 </a>
 </div>
@@ -325,24 +325,24 @@ value="${userReply.reg_date}" /></td>
         </div>
         
         <!-- 회원탈퇴 기능 modal 영역 -->
-        <div class="modal fade" id="Withdrawal" style="display: none;">
+        <div class="modal fade" id="userWithdrawal" style="display: none;">
             <div class="modal-dialog">
                 <div class="modal-content">
-                  <form role="form"  action="${path}/user/delete/memberInfo" method="post">
+                  <form role="form" id="withdrawalForm" action="${path}/user/withdraw/userInfo" method="post">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span></button>
-                        <h4 class="modal-title">회원 탈퇴</h4>
+                        	<h4 class="modal-title">회원 탈퇴</h4>
                     </div>
                     <div class="modal-body">
                         <div class="form-group has-feedback">
-                            <input type="password" class="form-control" placeholder="비밀번호를 입력해주세요">
+                            <input type="password" name="userPw" class="form-control" placeholder="비밀번호 입력">
                             <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default pull-left" data-dismiss="modal">닫기</button>
-                        <button type="button" class="btn btn-primary deleteMemberInfo">회원 탈퇴</button>
+                        <button type="button" class="btn btn-primary withdrawUserInfo">회원 탈퇴</button>
                     </div>
                   </form>
                 </div>
@@ -402,8 +402,8 @@ value="${userReply.reg_date}" /></td>
             $("#userImageForm").submit();
         });
         // 회원 탈퇴
-        $(".deleteMemberInfo").on("click", function() {
-        	$(".Withdrawal")
+        $(".withdrawUserInfo").on("click", function() {
+        	$("#withdrawalForm").submit();
         })
         var param = {
             "language": {

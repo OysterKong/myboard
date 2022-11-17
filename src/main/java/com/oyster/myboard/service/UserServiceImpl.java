@@ -54,10 +54,10 @@ public class UserServiceImpl implements UserService {
 		userDao.updatePw(dto);
 	}
 	
-	//회원 프로필 사진 수정
+	//회원탈퇴
 	@Override
-	public void modifyUserImage(String userId, String userImg) throws Exception {
-		userDao.updateUserImage(userId, userImg);
+	public void withdraw(UserDto dto) throws Exception {
+		userDao.withdraw(dto);
 	}
 	
 	

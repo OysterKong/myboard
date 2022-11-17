@@ -34,6 +34,5 @@ public interface ArticleDAO {
 
 	List<ArticleDto> userBoardList(String userId) throws Exception;
 
-	void updateWriterImg(ArticleDto dto) throws Exception;
 
 }

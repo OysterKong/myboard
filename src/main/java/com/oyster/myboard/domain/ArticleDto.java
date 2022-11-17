@@ -16,9 +16,6 @@ public class ArticleDto {
 	private String[] files;
 	private int fileCnt;
 	
-	private String writerImg;
-	private UserDto userDto;
-	
 	
 	public Integer getArticle_no() {
 		return article_no;
@@ -91,32 +88,14 @@ public class ArticleDto {
 	public void setFileCnt(int fileCnt) {
 		this.fileCnt = fileCnt;
 	}
-	
-	public String getWriterImg() {
-		return writerImg;
-	}
-
-	public void setWriterImg(String writerImg) {
-		writerImg = userDto.getUserImg();
-		this.writerImg = writerImg;
-	}
-
-	public UserDto getUserDto() {
-		return userDto;
-	}
-
-	public void setUserDto(UserDto userDto) {
-		this.userDto = userDto;
-	}
 
 	@Override
 	public String toString() {
 		return "ArticleDto [article_no=" + article_no + ", title=" + title + ", content=" + content + ", writer="
 				+ writer + ", regDate=" + regDate + ", viewCnt=" + viewCnt + ", replyCnt=" + replyCnt + ", files="
-				+ Arrays.toString(files) + ", fileCnt=" + fileCnt + ", writerImg=" + writerImg + ", userDto=" + userDto
-				+ "]";
+				+ Arrays.toString(files) + ", fileCnt=" + fileCnt + "]";
 	}
-
+	
 
 
 }

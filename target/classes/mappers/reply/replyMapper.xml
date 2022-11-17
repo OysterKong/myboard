@@ -64,7 +64,6 @@
         <result property="reg_date" column="reg_date"/>
         <result property="update_date" column="update_date"/>
         <association property="userDto" resultMap="userDtoResultMap"/>
-        <association property="articleDto" resultMap="ArticleResultMap"/>
     </resultMap>
 
     <resultMap id="ArticleResultMap" type="ArticleDto">
@@ -76,8 +75,6 @@
         <result property="viewCnt" column="viewcnt"/>
         <result property="replyCnt" column="reply_cnt" />
         <result property="fileCnt" column="file_cnt" />
-        <result property="writerImg" column="writerImg" />
-        <association property="userDto" resultMap="userDtoResultMap"/>
     </resultMap>
     
     <resultMap id="userDtoResultMap" type="UserDto">
