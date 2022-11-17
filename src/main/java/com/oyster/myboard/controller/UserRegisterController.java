@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.oyster.myboard.domain.UserDto;
@@ -25,8 +26,14 @@ public class UserRegisterController {
 	
 	//회원가입 기능
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String registerPOST(UserDto dto, RedirectAttributes rattr) throws Exception {
+	public String registerPOST(UserDto dto, RedirectAttributes rattr,
+											@RequestParam("userPw") String userPw,
+											@RequestParam("userPw2") String userPw2) throws Exception {
 		
+		if(!userPw.equals(userPw2)) {
+			rattr.addFlashAttribute("msg", "FAILURE");
+			return "redirect:/user/register";
+		}
 		//BCrypt.hashpw( 첫번째파라미터 : 암호화할 비밀번호 , 두번째파라미터 : BCrypt.gensalt() ) = 암호화된 비밀번호 반환
         String hashedPw = BCrypt.hashpw(dto.getUserPw(), BCrypt.gensalt());
         dto.setUserPw(hashedPw);
@@ -36,11 +43,7 @@ public class UserRegisterController {
         return "redirect:/user/login"; 
 	}
 	
-//	//로그인 페이지 (임시로 여기에 작성, 추후 UserLoginController에서 다시 작성예정)
-//    @RequestMapping(value = "/login", method = RequestMethod.GET)
-//    public String login() throws Exception {
-//        return "/user/login";
-//    }
+
 	
 
 }

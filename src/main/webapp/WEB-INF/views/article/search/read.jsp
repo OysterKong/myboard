@@ -143,7 +143,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	     </div>
 
 	     
-			     <%--댓글 수정 modal 영역--%>
+		<%--댓글 수정 modal 영역--%>
 		<div class="modal fade" id="modModal">
 		    <div class="modal-dialog">
 		        <div class="modal-content">

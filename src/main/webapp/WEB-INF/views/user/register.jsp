@@ -40,7 +40,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" name="userPw" class="form-control" placeholder="비밀번호">
+          <input type="password" name="userPw" class="form-control" placeholder="비밀번호" autoComplete="off">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -48,7 +48,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="비밀번호 확인">
+          <input type="password" name="userPw2" class="form-control" placeholder="비밀번호 확인" autoComplete="off">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -81,13 +81,16 @@
 
 <%@ include file="../include/plugin_js.jsp" %>
 <script>
-    $(function () {
-        $('input').iCheck({
-            checkboxClass: 'icheckbox_square-blue',
-            radioClass: 'iradio_square-blue',
-            increaseArea: '20%' // optional
-        });
-    });
+	
+	$(document).ready(function () {
+	
+    var msg = "${msg}";
+    if (msg == "FAILURE") {
+        alert("입력하신 비밀번호가 서로 다릅니다. 확인 후 올바르게 입력해주세요.");
+    	};
+	});
+
+    
 </script>
 </body>
 </html>

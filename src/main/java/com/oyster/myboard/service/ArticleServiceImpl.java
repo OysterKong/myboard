@@ -32,14 +32,17 @@ public class ArticleServiceImpl implements ArticleService {
 		String[] files = dto.getFiles();
 		
 		if(files == null) {
-			
 			articleDao.create(dto);
+			articleDao.updateWriterImg(dto);
 			return;
 		}
+		
 		dto.setFileCnt(files.length);
 		articleDao.create(dto);
+		articleDao.updateWriterImg(dto);
 		logger.info("Create - "+dto.toString());
 		Integer article_no = dto.getArticle_no();
+		
 		for(String fileName : files) {
 			articleFileDao.addAttach(fileName, article_no);
 		}	
@@ -62,12 +65,12 @@ public class ArticleServiceImpl implements ArticleService {
 		String[] files = dto.getFiles();
 		
 		if(files == null) {
+			articleDao.update(dto);
 			dto.setFileCnt(0);
 			return;
 		}
 		
 		dto.setFileCnt(files.length);
-		
 		articleDao.update(dto);
 		for(String fileName : files) {
 			articleFileDao.replaceAttach(fileName, article_no);
@@ -105,6 +108,13 @@ public class ArticleServiceImpl implements ArticleService {
 	public int countSearchedArticles(SearchCondition searchCondition) throws Exception {
 	    return articleDao.countSearchedArticles(searchCondition);
 	}
+	
+	@Override
+	public List<ArticleDto> userBoardList(String userId) throws Exception {
+		return articleDao.userBoardList(userId);
+	}
+	
+
 	
 
 }

@@ -30,6 +30,12 @@ Q8. Public Key Retrieval is not allowed
 A8. root-context.xml 에서 allowPublicKeyRetrieval=true 을 붙여준 뒤 해결 ( MySQL 8.0 이상에서 useSSL=false 조건 시 allowPublicKeyRetrieval=true 설정이 없으면 발생 )
  <property name="url" value="jdbc:log4jdbc:mysql://127.0.0.1:3306/myboard?serverTimezone=Asia/Seoul&amp;useSSL=false&amp;allowPublicKeyRetrieval=true"></property>
 
-Q9. java.sql.SQLIntegrityConstraintViolationException: Cannot add or update a child row: a foreign key constraint fails
+Q9. [DOM] Input elements should have autocomplete attributes (suggested: "new-password")
+	비밀번호의 경우 자동완성으로 인해 노출되는 것을 막고자 console창에 경고 발생
+A9. autoComplete="off" 추가해줌으로써 console창 경고 지워짐
+
+
+
+Q10. java.sql.SQLIntegrityConstraintViolationException: Cannot add or update a child row: a foreign key constraint fails
  (`myboard`.`tb_article_file`, CONSTRAINT `fk_article_file` FOREIGN KEY (`article_no`) REFERENCES `tb_article` (`article_no`))
-A9. 
+A10. 

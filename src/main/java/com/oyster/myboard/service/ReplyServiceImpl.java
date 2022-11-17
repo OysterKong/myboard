@@ -64,5 +64,11 @@ public class ReplyServiceImpl implements ReplyService {
 		replyDao.delete(reply_no);  // 댓글 삭제
 		articleDao.updateReplyCnt(article_no, -1);  // 댓글 갯수 감소
 	}
+	
+	@Override
+	public List<ReplyDto> userReplies(String userId) throws Exception {
+		return replyDao.userReplies(userId);
+	}
+	
 
 }

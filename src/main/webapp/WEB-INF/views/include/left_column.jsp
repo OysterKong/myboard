@@ -12,7 +12,7 @@
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <c:if test="${empty login}">
 	        <div class="image">
-	          <img src="${path}/dist/img/user1-128x128.jpg" class="img-circle elevation-2" alt="User Image">
+	          <img src="${path}/dist/img/profile/user/default-user.png" class="img-circle elevation-2" alt="User Image">
 	        </div>
 	        <div class="info">
                 <%-- Status --%>
@@ -22,7 +22,7 @@
         
         <c:if test="${not empty login}">
 	        <div class="image">
-	          <img src="${path}/dist/img/user1-128x128.jpg" class="img-circle elevation-2" alt="User Image">
+	          <img src="${path}/dist/img/profile/${login.userImg}" class="img-circle elevation-2" alt="User Image">
 	        </div>
 	        <div class="info">
                 <%-- Status --%>

@@ -32,4 +32,8 @@ public interface ArticleDAO {
 
 	void updateViewCnt(Integer article_no) throws Exception;
 
+	List<ArticleDto> userBoardList(String userId) throws Exception;
+
+	void updateWriterImg(ArticleDto dto) throws Exception;
+
 }

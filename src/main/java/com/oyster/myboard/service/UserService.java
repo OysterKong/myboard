@@ -16,5 +16,17 @@ public interface UserService {
 	void keepLogin(String userId, String sessionId, Date sessionLimit) throws Exception;
 
 	UserDto checkLoginBefore(String value) throws Exception;
+	
+	//회원정보 얻기
+	UserDto getUser(String userId) throws Exception;
+	
+	//회원정보 수정
+	void modifyUser(UserDto dto) throws Exception;
+	
+	//회원비밀번호 수정처리
+	void modifyPw(UserDto dto) throws Exception;
+	
+	//회원 프로필 사진 수정
+	void modifyUserImage(String userId, String userImg) throws Exception;
 
 }

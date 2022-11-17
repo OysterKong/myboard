@@ -23,6 +23,8 @@ public interface ReplyService {
 
 	void removeReply(Integer reply_no) throws Exception;
 
+	List<ReplyDto> userReplies(String userId) throws Exception;
+
 
 
 }

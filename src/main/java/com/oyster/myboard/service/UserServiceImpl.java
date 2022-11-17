@@ -22,6 +22,7 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public UserDto login(LoginDto loginDto) throws Exception {
+		userDao.updateLoginDate(loginDto.getUserId());
 		return userDao.login(loginDto);
 	}
 
@@ -35,5 +36,29 @@ public class UserServiceImpl implements UserService {
 		return userDao.checkUserWithSessionKey(value);
 	}
 	
-
+	//회원정보 얻기
+	@Override
+	public UserDto getUser(String userId) throws Exception {
+		return userDao.getUser(userId);
+	}
+	
+	//회원정보 수정
+	@Override
+	public void modifyUser(UserDto dto) throws Exception {
+		userDao.updateUser(dto);
+	}
+	
+	//회원비밀번호 수정처리
+	@Override
+	public void modifyPw(UserDto dto) throws Exception {
+		userDao.updatePw(dto);
+	}
+	
+	//회원 프로필 사진 수정
+	@Override
+	public void modifyUserImage(String userId, String userImg) throws Exception {
+		userDao.updateUserImage(userId, userImg);
+	}
+	
+	
 }

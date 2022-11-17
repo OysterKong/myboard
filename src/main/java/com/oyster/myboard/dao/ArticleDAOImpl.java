@@ -90,6 +90,18 @@ public class ArticleDAOImpl implements ArticleDAO {
 	public void updateViewCnt(Integer article_no) throws Exception {
 	    session.update(namespace + "updateViewCnt", article_no);
 	}
+	
+	//회원이 작성한 게시글 목록
+	@Override
+	public List<ArticleDto> userBoardList(String userId) throws Exception {
+		return session.selectList(namespace + "userBoardList", userId);
+	}
+	
+	//회원 프로필 사진 수정
+	@Override
+	public void updateWriterImg(ArticleDto dto) throws Exception {
+		session.update(namespace + "updateWriterImg", dto);
+	}
 
 
 }

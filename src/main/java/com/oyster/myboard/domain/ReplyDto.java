@@ -13,6 +13,8 @@ public class ReplyDto {
 	
 	private UserDto userDto;
 	
+	private ArticleDto articleDto;
+	
 	
 	public Integer getReply_no() {
 		return reply_no;
@@ -68,6 +70,14 @@ public class ReplyDto {
 
 	public void setUserDto(UserDto userDto) {
 		this.userDto = userDto;
+	}
+	
+	public ArticleDto getArticleDto() {
+		return articleDto;
+	}
+
+	public void setArticleDto(ArticleDto articleDto) {
+		this.articleDto = articleDto;
 	}
 
 	@Override

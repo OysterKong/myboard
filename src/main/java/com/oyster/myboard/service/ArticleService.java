@@ -26,4 +26,6 @@ public interface ArticleService {
 
 	int countSearchedArticles(SearchCondition searchCondition) throws Exception;
 
+	List<ArticleDto> userBoardList(String userId) throws Exception;
+
 }

@@ -66,13 +66,7 @@
     } else if (msg == "FAILURE") {
         alert("아이디와 비밀번호를 확인해주세요.");
     }
-    $(function () {
-        $('input').iCheck({
-            checkboxClass: 'icheckbox_square-blue',
-            radioClass: 'iradio_square-blue',
-            increaseArea: '20%' // optional
-        });
-    });
+
 </script>
 </body>
 </html>
