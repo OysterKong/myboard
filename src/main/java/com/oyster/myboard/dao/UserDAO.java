@@ -33,5 +33,8 @@ public interface UserDAO {
 	
 	//회원탈퇴
 	void withdraw(UserDto dto) throws Exception;
+	
+	//아이디 중복검사
+	int duplicationCheck(String userId) throws Exception;
 
 }

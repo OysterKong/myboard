@@ -76,6 +76,13 @@ public class UserDAOImpl implements UserDAO {
 		session.delete(namespace + "userWithdraw", dto);
 	}
 	
+	//아이디 중복검사
+	@Override
+	public int duplicationCheck(String userId) throws Exception {
+		return session.selectOne(namespace + "duplicationCheck", userId);
+	}
+	
+	
 	
 	
 	

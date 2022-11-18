@@ -71,7 +71,13 @@
 		WHERE user_id = #{userId}
 		AND user_pw = #{userPw}
 	</delete>
-
+	
+	<!-- 아이디 중복검사 -->
+	<select id="duplicationCheck" parameterType="String" resultType="int">
+		SELECT count(user_id)
+		FROM tb_user
+		WHERE user_id = #{userId} 
+	</select>
     
     <resultMap id="userDtoResultMap" type="UserDto">
         <id property="userId" column="user_id"/>

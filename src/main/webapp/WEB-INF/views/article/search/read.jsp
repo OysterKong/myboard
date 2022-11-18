@@ -46,7 +46,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		            <h3 class="card-title">글제목 : ${article.title}</h3>
 		        </div>  
 		        <div class="card-body" style="height: 700px">
-		            ${article.content}
+		           ${article.content}"
 		        </div>
 		        
 		            <%--업로드 파일 정보 영역--%>

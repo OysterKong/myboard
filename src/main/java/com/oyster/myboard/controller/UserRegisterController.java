@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.oyster.myboard.domain.UserDto;
@@ -29,7 +30,11 @@ public class UserRegisterController {
 	public String registerPOST(UserDto dto, RedirectAttributes rattr,
 											@RequestParam("userPw") String userPw,
 											@RequestParam("userPw2") String userPw2) throws Exception {
-		
+		int result = userService.duplicationCheck(dto.getUserId());
+		if( result == 1 ) {
+			rattr.addFlashAttribute("msg", "INVALID");
+			return "redirect:/user/register";
+		}
 		if(!userPw.equals(userPw2)) {
 			rattr.addFlashAttribute("msg", "FAILURE");
 			return "redirect:/user/register";
@@ -41,6 +46,14 @@ public class UserRegisterController {
         rattr.addFlashAttribute("msg", "REGISTERED");
 
         return "redirect:/user/login"; 
+	}
+	
+	//회원가입 시 중복검사 기능
+	@RequestMapping(value = "/duplicationCheck", method = RequestMethod.POST)
+	@ResponseBody
+	public int idCheck(@RequestParam("userId") String userId) throws Exception {
+		int result = userService.duplicationCheck(userId);
+		return result;
 	}
 	
 

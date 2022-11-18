@@ -16,11 +16,19 @@
 
       <form action="${path}/user/register" id=registerForm method="post">
         <div class="input-group mb-3">
-          <input type="text" name="userId" id=userId class="form-control" placeholder="아이디">
+          <input type="text" name="userId" id=userId class="form-control" placeholder="아이디" required oninput = "checkId()">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-exclamation"></span>
             </div>
+          </div>
+        </div>
+        <div class="input-group mb-1">
+          <div class="col-8">
+          <div>
+			<span class="validId" style="color:green; display:none;">사용 가능한 아이디입니다.</span>
+			<span class="invalidId" style="color:red; display:none;">중복된 아이디입니다.</span>
+			</div>
           </div>
         </div>
         <div class="input-group mb-3">
@@ -87,8 +95,9 @@
     var msg = "${msg}";
     if (msg == "FAILURE") {
         alert("입력하신 비밀번호가 서로 다릅니다. 확인 후 올바르게 입력해주세요.");
+    	} else if (msg == "INVALID") {
+            alert("중복된 아이디로는 회원가입이 불가능합니다.");
     	};
-    	
     
     	$('#userRegister').on("click", function () {
     	if($('#userId').val() == '') {
@@ -122,18 +131,32 @@
     		return;
     	}
     	$('#registerForm').submit();
-    	
-    		
-    		
-    	});
-    	
-    	
-    	
-    	
-    	
-    	
-	});
+    });
+});
 
+	function checkId() {
+		var userId = $("#userId").val();
+	$.ajax({
+		url:'${path}/user/duplicationCheck',
+		type:'post',
+		data:{userId:userId},
+		success:function(result) {
+			if(result != 1 && userId.length > 0) {
+				$('.validId').css("display", "inline-block");
+				$('.invalidId').css("display", "none");    					
+			} else if(result == 1 && userId.length > 0) {
+				$('.validId').css("display", "none");
+				$('.invalidId').css("display", "inline-block");  
+			} else {
+				$('.validId').css("display", "none");
+				$('.invalidId').css("display", "none"); 
+			}
+		},
+		error:function(request, error) {
+			alert("아이디 중복 검사가 실패했습니다.");
+		}
+	});
+};
     
 </script>
 </body>

@@ -60,5 +60,11 @@ public class UserServiceImpl implements UserService {
 		userDao.withdraw(dto);
 	}
 	
+	//아이디 중복검사
+	@Override
+	public int duplicationCheck(String userId) throws Exception {
+		return userDao.duplicationCheck(userId);
+	}
+	
 	
 }
