@@ -74,7 +74,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <div class="card-body">
                 <p class="card-text">
                   기본적인 CRUD 와 페이징, 검색, 댓글, 파일첨부 기능이 포함된 게시판입니다.<br>
-                  1. 회원가입, 회원탈퇴<br>
+                  1. 회원가입, 회원탈퇴, 아이디중복확인<br>
                   2. 로그인, 로그아웃, 로그인유지(Cookie), 비밀번호 암호화(Bcrypt)<br>
                   3. 회원정보수정, 비밀번호수정, 프로필사진수정(X)<br>
                 </p>

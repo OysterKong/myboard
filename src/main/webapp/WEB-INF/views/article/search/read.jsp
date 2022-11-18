@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<% pageContext.setAttribute("replaceChar", "\n");%>
 <!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
@@ -45,8 +47,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		        <div class="card-header">
 		            <h3 class="card-title">글제목 : ${article.title}</h3>
 		        </div>  
-		        <div class="card-body" style="height: 700px">
-		           ${article.content}"
+		        <div class="card-body">
+		           ${fn:replace(article.content, replaceChar, "<br/>")}
 		        </div>
 		        
 		            <%--업로드 파일 정보 영역--%>
@@ -522,6 +524,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	    });
  
 	});
+	
 	
 	
 </script>
