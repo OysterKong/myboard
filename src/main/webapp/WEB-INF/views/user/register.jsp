@@ -66,9 +66,9 @@
         <div class="row">
           <div class="col-8">
             <div class="icheck-primary">
-              <input type="checkbox" id="agreeTerms" name="terms" value="agree">
+              <input type="checkbox" id="agreeTerms" name="terms">
               <label for="agreeTerms">
-               이 <a href="#">규정</a> 동의 합니다.
+               이 <a href="#">이용약관</a>에 동의 합니다.
               </label>
             </div>
           </div>
@@ -114,6 +114,10 @@
     		alert('이메일을 입력해주세요.');
     		$('#userEmail').focus();
     		return;
+    	} else if (!isEmail($('#userEmail').val())) {
+    		alert("올바른 이메일 형식이 아닙니다. 다시 확인 후 입력해주세요.")
+    		$('#userEmail').focus();
+    		return;
     	}
     	if($('#userPw').val() == '') {
     		alert('비밀번호를 입력해주세요.');
@@ -130,6 +134,7 @@
     		$('#userPw').focus();
     		return;
     	}
+    	agree_TermsCheck();
     	$('#registerForm').submit();
     });
 });
@@ -157,6 +162,29 @@
 		}
 	});
 };
+
+	function isEmail(asValue) {
+		var regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+	 
+		return regExp.test(asValue);
+	}
+	
+
+	
+	$('#agreeTerms').change(function() {
+		agree_TermsCheck();
+	});
+	
+	
+	function agree_TermsCheck() {
+		if($('#agreeTerms').prop("checked")) {
+			console.log("체크");
+			$('#userRegister').prop("disabled", false);
+		} else {
+			console.log("언 체크");
+			$('#userRegister').prop("disabled", true);
+		}
+	};
     
 </script>
 </body>
